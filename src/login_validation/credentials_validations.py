@@ -1,6 +1,5 @@
-import pymongo
 import hashlib
-import os
+from src.mongo_db_ops.db_operations import mongo_db_atlas_ops
 class user_validation:
     def __init__(self,email,password):
         '''This class is for user Authentication when he or she tries to login
@@ -19,16 +18,10 @@ class user_validation:
         result = hashlib.sha256(password.encode())
         return str(result.hexdigest())
     def validate_password_and_email(self)->bool:
-        '''Used to validate the funtion'''
-        client=self.get_mongo_db_connection()
+        '''Used to validate the password and email'''
+        mongo_conn=mongo_db_atlas_ops()
+        client=mongo_conn.get_mongo_db_connection()
         login_credentials=client['Human_and_Plant_Health_SDM']
-        email_validation=login_credentials['login_credentials'].find({'email':str(self.email)})
-        password_validation=login_credentials['login_credentials'].find({'password':self.password})
-        if email_validation.count()>0 and password_validation.count()>0:
-            return True
-        return False
-    def get_mongo_db_connection(self):
-        '''Responsible for the connection with MongoDB Atlas'''
-        user=os.environ.get('MONGO_USER')
-        mongo_password=os.environ.get('MONGO_PASSWORD')
-        return pymongo.MongoClient(f"mongodb+srv://{user}:{mongo_password}@cluster0.hpbfo.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+        return mongo_conn.find_in_database(login_credentials,str(self.email),str(self.password))
+        
+    

@@ -25,7 +25,7 @@
 			<div class="row justify-content-center">
 				<div class="col-md-6 col-lg-4">
 					<div class="login-wrap p-0">
-		      	<h3 class="mb-4 text-center">Have an account?</h3>
+		      	<h3 class="mb-4 text-center" style="color: #FF0000">Failed to login</h3>
 		      	<form action="{{url_for('home')}}" class="signin-form" method="post">
 		      		<div class="form-group">
 		      			<input type="email" class="form-control" name="email" placeholder="email" required>
@@ -49,7 +49,7 @@
 								</div>
 	            </div>
 	          </form>
-	          <p class="w-100 text-center">&mdash; Don't Have an Account &mdash;</p>
+	          <p class="w-100 text-center" style="color: #FF0000">&mdash; Failed To login Please Try Again &mdash;</p>
 	          <div class="social d-flex text-center">
 	          	<a href="{{url_for('signup')}}" class="px-2 py-2 mr-md-1 rounded"><span class="ion-logo-facebook mr-2"></span> Sign up</a>
 	          	<a href="{{url_for('demo')}}" class="px-2 py-2 ml-md-1 rounded"><span class="ion-logo-twitter mr-2"></span> Demo</a>
