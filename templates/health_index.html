@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <title>Health App by Vicky</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+ 
+        }
+ 
+        .carousel-inner img {
+            height: 70vh;
+        }
+ 
+        form {
+            display: flex;
+            height: 85vh;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+            width: 60%;
+            text-align: center;
+            margin: auto;
+        }
+ 
+        .details h2 {
+             
+            position: relative;
+            top: 100px;
+            margin: auto;
+            color: rgb(18, 231, 231);
+            font-size: 3rem;
+        }
+ 
+        label:hover {
+            transform: scale(1.03);
+        }
+ 
+        .details h2 {
+            /* margin-bottom: 300px; */
+            position: relative;
+            top: 100px;
+            margin: auto;
+            color: rgb(18, 231, 231);
+            font-size: 3rem;
+ 
+        }
+ 
+        .gallery-h1 h1 {
+ 
+            background-color: rgb(44, 43, 43);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+ 
+        }
+ 
+        .details h1 {
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            background-color: rgb(45, 47, 49);
+        }
+ 
+        .upload {
+ 
+            font-size: 20px;
+            background-color: rgb(255, 252, 252);
+            border-radius: 20px;
+            outline: none;
+            width: 315px;
+            color: rgb(0, 0, 0);
+            border: 3px solid rgb(45, 47, 49);
+ 
+        }
+ 
+        ::-webkit-file-upload-button {
+            color: white;
+            padding: 20px;
+            border: 2px solid rgb(129, 129, 129);
+            background-color: rgb(129, 129, 129);
+            border-radius: 15px;
+ 
+        }
+ 
+        ::-webkit-file-upload-button:hover {
+            border-radius: 20px;
+            border: 2px solid rgb(177, 174, 174);
+ 
+        }
+ 
+        input[type="submit"] {
+            position: absolute;
+            margin-top: 150px;
+            padding: 15px 35px;
+            background-color: white;
+            border-radius: 15px;
+            color: black;
+            font-size: 1.5rem;
+            border: 4px solid rgb(31, 185, 190);
+        }
+ 
+        .carousel-caption {
+            background: rgba(24, 25, 26, 0.5);
+            border-radius: 10px;
+        }
+ 
+        .carousel-caption h3 {
+ 
+ 
+            font-family: 'Rowdies', cursive;
+            color: yellow;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+ 
+        }
+ 
+        .carousel-caption p {
+            padding: 7px;
+ 
+        }
+ 
+        .img-thumbnail {
+            height: 300px;
+        }
+ 
+        .Content-h5 {
+ 
+            padding: 15px;
+            background-color: rgb(153, 156, 150);
+            color: white;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+ 
+        @media only screen and (max-width: 325px) {
+            body {
+                font-size: x-small;
+            }
+        }
+    </style>
+</head>
+<head>
+  <link rel="shortcut icon" type="image/x-icon" href="/static/images/favicon.png" />
+</head>
+<body>
+     <!-- navbar Start......................... -->
+    <!-- This example requires Tailwind CSS v2.0+ -->
+    <nav class="bg-gray-800">
+      <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+          <div class="relative flex items-center justify-between h-16">
+              <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                  <!-- Mobile menu button-->
+                  <button
+                      class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                      aria-expanded="false">
+                      <span class="sr-only">Open main menu</span>
+                      <!-- Icon when menu is closed. -->
+                      <!--
+            Heroicon name: menu
+
+            Menu open: "hidden", Menu closed: "block"
+          -->
+                      <!-- <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                          stroke="currentColor" aria-hidden="true">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M4 6h16M4 12h16M4 18h16" />
+                      </svg> -->
+                      <!-- Icon when menu is open. -->
+                      <!--
+            Heroicon name: x
+
+            Menu open: "block", Menu closed: "hidden"
+          -->
+                      <!-- <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                          stroke="currentColor" aria-hidden="true">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M6 18L18 6M6 6l12 12" />
+                      </svg> -->
+                  </button>
+              </div>
+              <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+                  <div class="flex-shrink-0 flex items-center">
+                      <!-- <p style="color: white;"> -->
+
+                       <h5 style="color: white;">
+                      
+                         Vicky AI Production
+                      </h5> 
+                         
+                      <!-- </p> -->
+                      
+                  </div>
+                  <div class="hidden sm:block sm:ml-6">
+                      <div class="flex space-x-4">
+                          <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                          <a href="{{ url_for('home') }}"
+                              class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                          <a href="{{ url_for('heart') }}"
+                              class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Heart Disease</a>
+                          <a href="{{ url_for('breast') }}"
+                              class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Breast Cancer</a>
+                          <a href="{{ url_for('pnemonia') }}"
+                              class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Pnemonia Disease</a>
+                          <a href="{{ url_for('diabtes') }}"
+                              class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Diabtes</a>
+                          <a href="{{ url_for('skin') }}"
+                              class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Skin Cancer</a>
+                          <a href="{{ url_for('kidney') }}"
+                              class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Chronic Kidney Disease</a>
+                      </div>
+                  </div>
+              </div>
+              
+          </div>
+      </div>
+
+      <!--
+    Mobile menu, toggle classes based on menu state.
+
+    Menu open: "block", Menu closed: "hidden"
+  -->
+     
+  </nav>
+
+  <!-- navbar End............................ -->
+<!-- ............. crousel Start -->
+<header>
+<div class="container-fluid">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1" class=""></li>
+            <li data-target="#myCarousel" data-slide-to="2" class=""></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active ">
+                <img src="/static/Images/2h.jpg" class="d-block w-100" alt="...">
+
+                <div class="container">
+                    <div class="container background-img3">
+                        <div class="carousel-caption">
+
+                            <h3>
+                                Health Prediction AI App</h3>
+                            <p>
+                                Many veterans said that Deep Learning and AI is a threat to our world, but if we
+                                use it properly, we can do many good things today, we will see a small example
+                                of this in which we
+                                find out about some of the several human diseases.
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <img src="/static/images/3h.jpg" class="d-block w-100" alt="...">
+                <div class="container">
+                    <div class="carousel-caption">
+                        <h3>Health Prediction AI App
+                        </h3>
+                        <p>
+                            Red AI is come to <br> defeat black AI.</p>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="carousel-item">
+                <img src="/static/images/4h.jpg" class="d-block w-100" alt="...">
+                <div class="container">
+                    <div class="container ">
+                        <div class="carousel-caption">
+                            <h3>
+                                Health Prediction AI App </h3>
+                            <p> All rights reserved by Vicky World Production
+                       
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+</header>
+<!-- .......................... crousel End  -->
+
+<!-- ............... Galery Start....  -->
+
+<!-- ...........  -->
+
+<section class="text-gray-600 body-font">
+    <div class="container px-5 py-24 mx-auto">
+      <div class="flex flex-col text-center w-full mb-20">
+        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Just click the image for the Prediction.</h1>
+        <p class="lg:w-2/3 mx-auto leading-relaxed text-base">There are six different disease prediction models Chronic Kidney Disease, Diabtes Prediction,Heart Disease Prediction,Breast Cancer Prediction,Pnemonia Prediction, and skin cancer Prediction, please select the Image for respective prediction.</p>
+        
+      </div>
+      
+      <div class="flex flex-wrap -m-4">
+        
+        <div class="lg:w-1/3 sm:w-1/2 p-4">
+          <div class="flex relative">
+            
+            <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="/static/images/11.jpeg">
+            <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100">
+              <h2 class="tracking-widest text-sm title-font font-medium text-indigo-500 mb-1">Vicky AI Health Prediction App</h2>
+              
+              <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Heart Disease Prediction</h1>
+              <p class="leading-relaxed"> It will tell you that the patient has some disease regarding heart or not, based on the information you provide to it.
+                <br>
+                <br>
+                </p>
+                
+                <a href="{{ url_for('heart') }}" style="text-decoration: none;" style="color: green;">
+                  
+                  <button type="button" class="btn btn-outline-success">
+                    
+                    
+                    Click here to Open
+                  </button>
+                </a>
+              
+              
+            </div>
+          </div>
+        </div>
+        <div class="lg:w-1/3 sm:w-1/2 p-4">
+          <div class="flex relative">
+            <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="/static/images/2.jpeg">
+            <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100">
+              <h2 class="tracking-widest text-sm title-font font-medium text-indigo-500 mb-1">Vicky AI Health Prediction App</h2>
+              <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Breast Cancer Prediction</h1>
+              <p class="leading-relaxed">Breast Cancer is now become a very severe and common disease espacially to women, this application will tell you that you have this disese or not.</p>
+              <a href="{{ url_for('breast') }}" style="text-decoration: none;" style="color: green;">
+              <button type="button" class="btn btn-outline-success">
+                
+                
+                Click here to Open
+              </button>
+            </a>
+            </div>
+          </div>
+        </div>
+        <div class="lg:w-1/3 sm:w-1/2 p-4">
+          <div class="flex relative">
+            <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="/static/images/3.jpeg">
+            <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100">
+              <h2 class="tracking-widest text-sm title-font font-medium text-indigo-500 mb-1">Vicky AI Health Prediction App</h2>
+              <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Pnemonia Prediction</h1>
+              <p class="leading-relaxed">Please open this to know that you have Pnemonia disease or not just drop the X-ray image.
+                <br>
+                <br>
+                <br>
+              </p>
+
+              <a href="{{ url_for('pnemonia') }}" style="text-decoration: none;" style="color: green;">
+                <button type="button" class="btn btn-outline-success">
+                  
+                  
+                  Click here to Open
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="lg:w-1/3 sm:w-1/2 p-4">
+          <div class="flex relative">
+            <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="/static/images/4.jpeg">
+            <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100">
+              <h2 class="tracking-widest text-sm title-font font-medium text-indigo-500 mb-1">Vicky AI Health Prediction App</h2>
+              <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Diabtes Prediction</h1>
+              <p class="leading-relaxed">It will tell you that you have diabtes or not based on the information that you give to the model.</p>
+              <a href="{{ url_for('diabtes') }}" style="text-decoration: none;" style="color: green;">
+                <button type="button" class="btn btn-outline-success">
+                  
+                  
+                  Click here to Open
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="lg:w-1/3 sm:w-1/2 p-4">
+          <div class="flex relative">
+            <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="/static/images/5.jpeg">
+            <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100">
+              <h2 class="tracking-widest text-sm title-font font-medium text-indigo-500 mb-1">Vicky AI Health Prediction App</h2>
+              <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Skin Cancer Prediction</h1>
+              <p class="leading-relaxed">It will tell you that, you have skin cancer or not, just provide the picture to it.
+                <br>
+                <br>
+              </p>
+              <a href="{{ url_for('skin') }}" style="text-decoration: none;" style="color: green;">
+                <button type="button" class="btn btn-outline-success">
+                  
+                  
+                  Click here to Open
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="lg:w-1/3 sm:w-1/2 p-4">
+          <div class="flex relative">
+            <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="/static/images/6.jpeg">
+            <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100">
+              <h2 class="tracking-widest text-sm title-font font-medium text-indigo-500 mb-1">Vicky AI Health Prediction App</h2>
+              <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Kidney Disease Prediction</h1>
+              <p class="leading-relaxed">It will tell you that, you have most common chronic kidney disease or not, based on the information given to it.</p>
+              <a href="{{ url_for('kidney') }}" style="text-decoration: none;" style="color: green;">
+                <button type="button" class="btn btn-outline-success">
+                  
+                  
+                  Click here to Open
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<!-- Galery End.........................  -->
+<!-- ............... Contact Us Start................  -->
+<section class="text-gray-600 body-font relative">
+    <div class="container px-5 py-24 mx-auto">
+      <div class="flex flex-col text-center w-full mb-12">
+        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Contact Us</h1>
+        <p class="lg:w-2/3 mx-auto leading-relaxed text-base">In case of any querry, or for some sugestion please contact us. </p>
+      </div>
+      <div class="lg:w-1/2 md:w-2/3 mx-auto">
+        <div class="flex flex-wrap -m-2">
+            <div class="p-2 w-1/2">
+                <div class="relative">
+              <label for="name" class="leading-7 text-sm text-gray-600">Name</label>
+              <input type="text" id="name" name="name" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+            </div>
+        </div>
+          <div class="p-2 w-1/2">
+            <div class="relative">
+              <label for="email" class="leading-7 text-sm text-gray-600">Email</label>
+              <input type="email" id="email" name="email" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+            </div>
+          </div>
+          <div class="p-2 w-full">
+            <div class="relative">
+                <label for="message" class="leading-7 text-sm text-gray-600">Message</label>
+                <textarea id="message" name="message" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea>
+            </div>
+        </div>
+        <div class="p-2 w-full">
+            <button class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+              <a href="{{ url_for('home') }}" style="text-decoration: none;">
+                <p style="color: white;">
+
+                  Submit
+                </p>
+              </a> 
+            </button>
+        </div>
+          <div class="p-2 w-full pt-8 mt-8 border-t border-gray-200 text-center">
+              <a class="text-indigo-500">waqasbilal02@gmail.com</a>
+            <p class="leading-normal my-5">Multan, Punjab
+              <br>Pakistan
+            </p>
+            <span class="inline-flex">
+              <a class="text-gray-500">
+                <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                    <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                </svg>
+              </a>
+              <a class="ml-4 text-gray-500">
+                <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                    <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+                </svg>
+              </a>
+              <a class="ml-4 text-gray-500">
+                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+                </svg>
+              </a>
+              <a class="ml-4 text-gray-500">
+                <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                    <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
+                </svg>
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- .................. Contact Us End .................  -->
+
+  
+  <!-- ............ Testimonies Start..........  -->
+  <section class="text-gray-600 body-font">
+      <div class="container px-5 py-24 mx-auto">
+        <div class="xl:w-1/2 lg:w-3/4 w-full mx-auto text-center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="inline-block w-8 h-8 text-gray-400 mb-8" viewBox="0 0 975.036 975.036">
+            <path d="M925.036 57.197h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.399 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l36 76c11.6 24.399 40.3 35.1 65.1 24.399 66.2-28.6 122.101-64.8 167.7-108.8 55.601-53.7 93.7-114.3 114.3-181.9 20.601-67.6 30.9-159.8 30.9-276.8v-239c0-27.599-22.401-50-50-50zM106.036 913.497c65.4-28.5 121-64.699 166.9-108.6 56.1-53.7 94.4-114.1 115-181.2 20.6-67.1 30.899-159.6 30.899-277.5v-239c0-27.6-22.399-50-50-50h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.4 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l35.9 75.8c11.601 24.399 40.501 35.2 65.301 24.399z"></path>
+          </svg>
+          <p class="leading-relaxed text-lg">
+            Artificial Intelligence now a days is very famous and the top rated companies called it the 'job of the 21st centure'. After this it is now covering every field of our life like ecommerace, Medical, Sports, theif Detection and some anomalies detection in many ares like in banks, etc. So, that's why I exploring this field, while exploring a Health application idea is come into my mind so, this is how I implemented with best of my knowledge however, we are all human so, exceptions are always possible. 
+          </p>
+          <span class="inline-block h-1 w-10 rounded bg-indigo-500 mt-8 mb-6"></span>
+          <h1 class="text-gray-900 font-medium title-font tracking-wider text-sm">
+          <h3>
+
+            Waqas Bilal
+          </h3>
+          </h1>
+          <p class="text-gray-500">The only Creater and Designer of Vicky Health Prediction. </p>
+        </div>
+      </div>
+    </section>
+    <!-- .................... Testimonies End .................  -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script> -->
+</body>
+</html>

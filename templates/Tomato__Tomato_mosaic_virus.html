@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css"
+        integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
+ 
+    <title>{{pred_output}} </title>
+ 
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+ 
+        .border img {
+            border-radius: 15px;
+            border: 2px solid black;
+        }
+        div{
+            text-align: justify;
+  text-justify: inter-word;
+
+
+        }
+    </style>
+</head>
+ 
+<body>
+ 
+    <div>
+        <h5>Vicky World Prediction</h5>
+    </div>
+ 
+    <div class="container my-2">
+        <div class="row mb-5">
+ 
+            <div class="col-sm" style="margin-bottom: 23px;">
+                <span class="border border-primary">
+                    <img src="{{ url_for('static',filename=user_image) }}" alt="User Image" class="img-thumbnail">
+                     
+                </span>
+            </div>
+ 
+            <div class="col-sm">
+ 
+                <div>
+                    <h1 style="padding: 15px; background-color: rgb(153, 156, 150); color: white;"
+                        class="text-center mb-5 content-h1 rounded">
+                        {{pred_output}} </h1>
+                </div>
+                <div class="details">
+ 
+                    <h5  >
+                        The Tomato has Mosaic Virus</br></br> <br>
+                        <h2>
+                            What is Tomato Mosaic Virus
+                        </h2>
+                        Tomato mosaic virus is a serious and extremely contagious disease. It is also hard to identify, with symptoms varying wildly depending upon the variety and age of the infected plant, the strain of the virus, and environmental conditions. To make matters worse, it is very hard to distinguish from the closely related tobacco mosaic virus. Tomato mosaic virus symptoms can be found at any stage of growth and all parts of the plant may be infected. They are often seen as a general mottling or mosaic appearance on foliage. When the plant is severely affected, leaves may look akin to ferns with raised dark green regions. Leaves may also become stunted. Infected plants may have a severe reduction in fruit set and those that do set may be dotted with yellow blotches and necrotic spots while the interior of the fruit is brown. Stems, petioles, leaves and fruit may all show signs of infection.
+         
+<h2>
+    How to cure it?
+</h2>
+This viral disease is able to overwinter on perennial weeds and is then spread by several insects including aphids, leafhoppers, whiteflies and cucumber beetles. Both cuttings and divisions from infected plants will be infected. The disease is spread into the plant via small wounds caused by mechanical injury, insect chewing, and grafting. Leftover plant debris is the most common contagion. Tomato mosaic virus of tomatoes can exist in the soil or plant debris for up to two years, and can be spread just by touch – a gardener who touches or even brushes up against an infected plant can carry the infection for the rest of the day.  You should wash your hands with soap and disinfect tools after handling tomato plants to keep the disease from spreading. Treating mosaic virus is difficult and there are no chemical controls like there are for fungal diseases, although some varieties of tomato are resistant to the disease, and seeds can be bought that are certified disease free. Sanitation is the most important application to practice when controlling tobacco mosaic virus. Tools should be boiled for 5 minutes and then washed with a strong detergent. Bleaching doesn’t work for viral decontamination. Destroy any seedlings that appear stunted or distorted and then decontaminate tools and hands. Keep the area around the tomatoes weeded and free of plant detritus to minimize areas the disease can harbor. Control insects as well to lessen the chances of contamination. If you spot the disease in your garden, you should immediately dig up and burn infected plants. Don’t plant tomatoes, cucumbers or other plants that are susceptible to mosaic virus in that same area again.
+
+ 
+                        
+
+ 
+
+                    </h5>
+                </div>
+            </div>
+        </div>
+ 
+    </div>
+</body>
+ 
+</html>

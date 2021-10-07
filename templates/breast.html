@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <title>Breast Cancer Prediction</title>
+</head>
+<head>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/images/favicon.png" />
+  </head>
+<body>
+      <!-- navbar Start......................... -->
+    <!-- This example requires Tailwind CSS v2.0+ -->
+    <nav class="bg-gray-800">
+        <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+            <div class="relative flex items-center justify-between h-16">
+                <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                    <!-- Mobile menu button-->
+                    <button
+                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                        aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <!-- Icon when menu is closed. -->
+                        <!--
+              Heroicon name: menu
+  
+              Menu open: "hidden", Menu closed: "block"
+            -->
+                        <!-- <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg> -->
+                        <!-- Icon when menu is open. -->
+                        <!--
+              Heroicon name: x
+  
+              Menu open: "block", Menu closed: "hidden"
+            -->
+                        <!-- <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg> -->
+                    </button>
+                </div>
+                <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+                    <div class="flex-shrink-0 flex items-center">
+                        <!-- <p style="color: white;"> -->
+  
+                         <h5 style="color: white;">
+                        
+                           Vicky AI Production
+                        </h5> 
+                           
+                        <!-- </p> -->
+                        
+                    </div>
+                    <div class="hidden sm:block sm:ml-6">
+                        <div class="flex space-x-4">
+                            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                            <a href="{{ url_for('home') }}"
+                                class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                            <a href="{{ url_for('heart') }}"
+                                class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Heart Disease</a>
+                            <a href="{{ url_for('breast') }}"
+                                class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Breast Cancer</a>
+                            <a href="{{ url_for('pnemonia') }}"
+                                class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Pnemonia Disease</a>
+                            <a href="{{ url_for('diabtes') }}"
+                                class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Diabtes</a>
+                            <a href="{{ url_for('skin') }}"
+                                class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Skin Cancer</a>
+                            <a href="{{ url_for('kidney') }}"
+                                class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Chronic Kidney Disease</a>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+  
+        <!--
+      Mobile menu, toggle classes based on menu state.
+  
+      Menu open: "block", Menu closed: "hidden"
+    -->
+       
+    </nav>
+  
+    <!-- navbar End............................ -->
+    <h1>{{ prediction_text }}</h1>
+<style>
+    button,
+    input,
+    optgroup,
+    select,
+    textarea {
+        padding: 12px;
+        line-height: inherit;
+        color: inherit;
+    }
+</style>
+
+<!-- ............. form start.......  -->
+<form action="{{ url_for('breast_predict')}}" method="post" enctype="multipart/form-data" onsubmit="showloading()">
+
+    <section class="text-gray-600 body-font">
+        <div class="container px-5 py-24 mx-auto">
+            <div class="flex flex-wrap w-full mb-20 flex-col items-center text-center">
+                <h1 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">Breast Cancer Prediction</h1>
+                <p class="lg:w-1/2 w-full leading-relaxed text-gray-500">Breast Cancer is now become a very severe and common disease espacially to women, this application will tell you that you have this disese or not.</p>
+            </div>
+            <div class="flex flex-wrap -m-4">
+                <div class="xl:w-1/3 md:w-1/2 p-4">
+                    <div class="border border-gray-200 p-6 rounded-lg">
+                        <p>
+            
+                            Enter the mean radius:
+                        </p>
+                        <div class="col-auto">
+                            
+                            <input type="" class="form-control" placeholder="Enter in numbers" required='required' , name="mean_radius">
+                          </div>
+                    </div>
+                </div>
+                <div class="xl:w-1/3 md:w-1/2 p-4">
+                    <div class="border border-gray-200 p-6 rounded-lg">
+                        <p>
+            
+                            Enter the mean texture:
+                        </p>
+                        <div class="col-auto">
+                            
+                            <input type="" class="form-control" placeholder="Enter in numbers" required='required' , name="mean_texture">
+                          </div>
+                    </div>
+                </div>
+                
+                <div class="xl:w-1/3 md:w-1/2 p-4">
+                    <div class="border border-gray-200 p-6 rounded-lg">
+                        <p>
+                            
+                            Enter the mean perimeter:
+                        </p>
+            <div class="col-auto">
+                
+                <input type="" class="form-control" placeholder="Enter in numbers" required='required' , name="mean_perimeter">
+              </div>
+        </div>
+    </div>
+    <div class="xl:w-1/3 md:w-1/2 p-4">
+        <div class="border border-gray-200 p-6 rounded-lg">
+            <p>
+
+                Enter the mean area:
+            </p>
+            <div class="col-auto">
+                
+                <input type="" class="form-control" placeholder="Enter in numbers" required='required' , name="mean_area">
+              </div>
+        </div>
+    </div>
+    <div class="xl:w-1/3 md:w-1/2 p-4">
+        <div class="border border-gray-200 p-6 rounded-lg">
+            <p>
+
+                Enter Your mean smoothness:
+            </p>
+            <div class="col-auto">
+                
+                <input type="" class="form-control" placeholder="Enter in numbers" required='required' , name="mean_smoothness">
+              </div>
+        </div>
+    </div>
+    
+         
+    </div>
+    <button
+    class="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Click here to Predict</button>
+</div>
+</section>
+</form>
+<h1>{{ prediction_text }}</h1>
+<style>
+    button,
+    input,
+    optgroup,
+    select,
+    textarea {
+        padding: 12px;
+        line-height: inherit;
+        color: inherit;
+    }
+</style>
+
+ <!-- ....................... <script></script> -->  
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    crossorigin="anonymous"></script>
+</body>
+</html>

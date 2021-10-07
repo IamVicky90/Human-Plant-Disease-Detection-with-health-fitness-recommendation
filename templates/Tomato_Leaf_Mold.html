@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css"
+        integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
+ 
+    <title>{{pred_output}} </title>
+ 
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+ 
+        .border img {
+            border-radius: 15px;
+            border: 2px solid black;
+        }
+        div{
+            text-align: justify;
+  text-justify: inter-word;
+
+
+        }
+    </style>
+</head>
+ 
+<body>
+ 
+    <div>
+        <h5>Vicky World Prediction</h5>
+    </div>
+ 
+    <div class="container my-2">
+        <div class="row mb-5">
+ 
+            <div class="col-sm" style="margin-bottom: 23px;">
+                <span class="border border-primary">
+                    <img src="{{ url_for('static',filename=user_image) }}" alt="User Image" class="img-thumbnail">
+                     
+                </span>
+            </div>
+ 
+            <div class="col-sm">
+ 
+                <div>
+                    <h1 style="padding: 15px; background-color: rgb(153, 156, 150); color: white;"
+                        class="text-center mb-5 content-h1 rounded">
+                        {{pred_output}} </h1>
+                </div>
+                <div class="details">
+ 
+                    <h5>
+                        The Tomato has Leaf Mold Disesse</br></br> <br>
+                        <h2>
+                            What is Leaf Mold Disease?
+                        </h2>
+                        Leaf mold is a common fungal disease that affects tomatoes that are cultivated in especially humid environments. Feeding off of the humidity, the mold grows and thrives after attaching itself to the leaves of the tomato plant. Once the mold is noticed, immediate action is required to save the plant, otherwise the foliage will be compromised, which will reduce the amount of tomatoes your plants will yield. Fortunately for tomato growers, this fungal disease is relatively easy to treat and cure.
+
+                        
+                        <h2>
+                            How to cure it?
+                        </h2>
+                        Upon noticing the infected areas, the first step is to let the plants air out and dry. If they are being cultivated in a greenhouse, expose them to dry air conditions, because the humidity that the fungus needs to survive and thrive is dried up in the open air.
+<br>
+If the tomatoes are being cultivated outdoors, try to keep the leaves dry when watering the plants. One thing you can do to help keep the leaves as dry as possible is to water in the early morning hours, that way the plant has plenty of time to dry before the sun comes out, which will keep the humidity around the leaves low. You can also try drip irrigation methods, or soak watering methods to attempt to water the soil without ever wetting the leaves of the plant.
+<br>
+Another treatment option is fungicidal sprays. When using fungicide sprays, be sure to thoroughly cover all parts of the plant that is above ground, focusing specifically on the underside of leaves. Calcium chloride sprays are among the most highly recommended types for leaf mold. There are a few organic fungicides on the market as well.
+                    
+    <br>
+    There are also a handful of natural remedy recipes that you can try that are made out of common household items that can be mixed up in your kitchen and sprayed directly on your tomato crops. An apple-cider and vinegar mix is believed to treat the mold effectively. Corn and garlic spray can also be used to prevent fungi outbreaks before they even occur. There is also a milk-based spray that is touted as an all-natural, helpful cure for leaf mold.                    
+                        
+                        
+                        
+
+ 
+
+                    </h5>
+                </div>
+            </div>
+        </div>
+ 
+    </div>
+</body>
+ 
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css"
+        integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
+ 
+    <title>The Potato has Early Blight</title>
+ 
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+ 
+        .border img {
+            border-radius: 15px;
+            border: 2px solid black;
+        }
+        div{
+            text-align: justify;
+  text-justify: inter-word;
+
+
+        }
+    </style>
+</head>
+ 
+<body>
+ 
+    <div>
+        <h5>Vicky World Prediction</h5>
+    </div>
+ 
+    <div class="container my-2">
+        <div class="row mb-5">
+ 
+            <div class="col-sm" style="margin-bottom: 23px;">
+                <span class="border border-primary">
+                    <img src="{{ url_for('static',filename=user_image) }}" alt="User Image" class="img-thumbnail">
+                     
+                </span>
+            </div>
+ 
+            <div class="col-sm">
+ 
+                <div>
+                    <h1 style="padding: 15px; background-color: rgb(153, 156, 150); color: white;"
+                        class="text-center mb-5 content-h1 rounded">
+                        {{pred_output}} </h1>
+                </div>
+                <div class="details">
+ 
+                    <h5>
+                        The Potato has Early Blight</br></br> <br>
+                        <h2>
+
+                            What is Potato Early Blight? 
+                        </h2>
+                        Early blight of potato is a common disease found in most potato growing regions. The disease is caused by the fungus Alternaria solani, which can also afflict tomatoes and other members of the potato family. Potatoes become infected with early blight when foliage has become excessively wet due to rain, fog, dew, or irrigation. Although not a terminal disease, severe infections can be fairly detrimental. In contrast to its name, early blight rarely develops early; it actually usually affects mature foliage rather than young, tender leaves.
+                        <h2>
+
+                            How to cure it? 
+                        </h2>
+                        
+                        The spores and mycelia of the pathogen survive in infested plant debris and soil, in infected tubers and in overwintering host crops and weeds. Spores are produced when temperatures are between 41-86 F. (5-30 C.) with alternating periods of wetness and dryness. These spores are then spread through wind, splashing rain, and irrigation water. They gain entry via wounds caused by mechanical injury or insect feeding. Lesions begin to appear 2-3 days after the initial infection. Treatment of early blight includes prevention by planting potato varieties that are resistant to the disease; late maturing are more resistant than early maturing varieties. Avoid overhead irrigation and allow for sufficient aeration between plants to allow the foliage to dry as quickly as possible. Practice a 2-year crop rotation. That is, do not replant potatoes or other crops in this family for 2 years after a potato crop has been harvested. Keep the potato plants healthy and stress free by providing adequate nutrition and sufficient irrigation, especially later in the growing season after flowering when plants are most susceptible to the disease. Only dig the tubers up when they are completely mature to prevent from damaging them. Any damage done at harvest can additionally facilitate the disease.
+
+ 
+
+                    </h5>
+                </div>
+            </div>
+        </div>
+ 
+    </div>
+</body>
+ 
+</html>

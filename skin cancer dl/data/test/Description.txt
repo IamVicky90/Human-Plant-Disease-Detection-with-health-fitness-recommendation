@@ -1,0 +1,3 @@
+A tumor is an abnormal lump or growth of cells. When the cells in the tumor are normal, it is benign. 
+Something just went wrong, and they overgrew and produced a lump.
+When the cells are abnormal and can grow uncontrollably, they are cancerous cells, and the tumor is malignant.

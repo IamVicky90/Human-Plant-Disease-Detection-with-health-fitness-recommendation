@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css"
+        integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
+ 
+    <title>{{pred_output}} </title>
+ 
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+ 
+        .border img {
+            border-radius: 15px;
+            border: 2px solid black;
+        }
+        div{
+            text-align: justify;
+  text-justify: inter-word;
+
+
+        }
+    </style>
+</head>
+ 
+<body>
+ 
+    <div>
+        <h5>Vicky World Prediction</h5>
+    </div>
+ 
+    <div class="container my-2">
+        <div class="row mb-5">
+ 
+            <div class="col-sm" style="margin-bottom: 23px;">
+                <span class="border border-primary">
+                    <img src="{{ url_for('static',filename=user_image) }}" alt="User Image" class="img-thumbnail">
+                     
+                </span>
+            </div>
+ 
+            <div class="col-sm">
+ 
+                <div>
+                    <h1 style="padding: 15px; background-color: rgb(153, 156, 150); color: white;"
+                        class="text-center mb-5 content-h1 rounded">
+                        {{pred_output}} </h1>
+                </div>
+                <div class="details">
+ 
+                    <h5  >
+                        The Potato has Late Blight</br></br> <br>
+                        <h2>
+                            What is Potato Late Blight?
+                        </h2>
+                        Late blight is a fungus called Phytophthora infestans, which affects tomatoes and potatoes. In case you were wondering, late blight is the plant disease that is responsible for the famous Irish potato famine of 1845. Luckily, modern gardening has brought about a new age where we have the tools to fight back against garden diseases like late blight, and not only can we take steps to treat the garden to fight against localized diseases, but we can practice control methods to keep diseases from coming back.
+
+There are a number of tomato diseases that don’t affect the harvest or touch the fruit of your tomato plants. Late blight is not one of those diseases, and is actually capable of taking out fields full of crops in just a few short weeks. Found on tomato plants throughout the United States, late blight attacks tomatoes late in the growing season and symptoms often do not appear until after blooming has occurred. <br>
+
+Please note that late blight and early blight are two entirely different diseases.
+<h2>
+    How to cure it?
+</h2>
+TREATMENT AND CONTROL OF LATE BLIGHT
+Practice safe control methods to prevent late blight, such as practicing regular crop rotation, never planting tomatoes in the same location that tomatoes or potatoes were grown in the last two growing seasons. Plant resistant cultivars whenever possible. Remove all volunteer potato and tomato plants that sprout up in between seasons. Space all tomato plants out far enough from each other to allow for plenty of air circulation to help plants dry out faster when they get wet. When watering, try to perform the task in the early morning hours so that plants have a chance to dry out before the warmest part of the day. Try to avoid overhead watering methods, which get the stems and foliage of the plant’s leaves wet, opting instead for direct soil watering techniques, such as using drip irrigation, or soaker hoses. After harvesting, destroy and completely remove all tomato and potato plant debris immediately. Do not compost infected plants.
+
+If you notice late blight early on in the disease’s progression, treat the plant with one of these recommended fungicide options:
+
+
+Copper-based fungicides – Use a copper-based fungicide (mix 2 ounces of fungicide with a gallon of water) every 6 or 7 days following a watering or heavy rain. Try to apply fungicide when at least 12 hours of dry weather is ahead, so that the treatment has time to kill the fungus.
+Monterey All Natural Disease Control – This ready-made mix of all natural ingredients that help to control most plant foliar diseases. However, this blend is not for treating ongoing fungal issues, but needs to be sprayed on the plant when it reaches maturity to prevent infections from occurring in the first place.  
+SERENADE Garden – SERENADE is an organic bio-fungicide that is non-toxic and will not harm bees and other beneficial insects.
+Organocide Plant Doctor – Organocide is a foliar spray that attacks fungal issues that are already at hand and prevents future fungal issues from occurring. Mix two teaspoons of organocide with one gallon of water and spray at young plants every one to two weeks in intervals to protect your crops from fungal infections. 
+                        
+
+ 
+
+                    </h5>
+                </div>
+            </div>
+        </div>
+ 
+    </div>
+</body>
+ 
+</html>

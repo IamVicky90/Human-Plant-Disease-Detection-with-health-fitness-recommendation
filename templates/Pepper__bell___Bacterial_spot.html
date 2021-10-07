@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css"
+        integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
+ 
+    <title>Pepper bell has Bacterial Spot</title>
+ 
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+ 
+        .border img {
+            border-radius: 15px;
+            border: 2px solid black;
+        }
+    </style>
+</head>
+ 
+<body>
+ 
+    <div>
+        <h5>Vicky World Prediction</h5>
+    </div>
+ 
+    <div class="container my-2">
+        <div class="row mb-5">
+ 
+            <div class="col-sm" style="margin-bottom: 23px;">
+                <span class="border border-primary">
+                    <img src="{{ url_for('static',filename=user_image) }}" alt="User Image" class="img-thumbnail">
+                     
+                </span>
+            </div>
+ 
+            <div class="col-sm">
+ 
+                <div>
+                    <h1 style="padding: 15px; background-color: rgb(153, 156, 150); color: white;"
+                        class="text-center mb-5 content-h1 rounded">
+                        {{pred_output}} </h1>
+                </div>
+                <div class="details">
+ 
+                    <h5>
+                        Pepper bell has Bacterial Spot</br></br> <br>
+                       <h2>
+
+                           How to Prevent Bacterial Leaf Spots
+                       </h2> 
+Remember that bacterial leaf spot has no cure. This means that if the symptoms start spreading, it’ll be too late to stop them. As mentioned, there are several things you can do to prevent bacterial leaf spots from developing.
+
+One way to prevent the spread of bacterial leaf spot is through crop rotation. Make sure not to plant peppers in the same location within the past four to five years.
+
+After an entire growing season, throw away any crop debris from your garden beds. Don’t turn them into the compost because this debris may contain infectious diseases that may harm your new plants once you’ve cleared out everything, till the soil to get rid of remaining bacteria.
+
+Bacterial leaf spot is typically caused by damp soil getting onto the leaves, usually through watering overhead. Prevent excessive splattering by watering your pepper plants using a soaker hose or an appropriate irrigation system. Also, as much as possible, don’t water overhead.
+
+The disease can also spread through contaminated seeds. To ensure that your seeds and seedlings are disease-free, buy them from a trusted local garden shop. Don’t use your pepper seeds if you’ve had problems with bacterial leaf spot before.
+
+ 
+
+<h2>
+    
+    Other Ways to Prevent Bacterial Lead Spots 
+</h2>
+There are other ways you can do to prevent bacterial leaf spot. These include planting resistant pepper variants; using mulch plants with organic materials; switching to drip irrigation; eliminating extra moisture; regularly checking your pepper plants for weeds and soaking your seeds in a chlorine solution for two minutes.
+
+In case you’re wondering, if you don’t know how to make a chlorine solution, try mixing 1-part bleach and nine parts water. Furthermore, you need to make sure that your seeds are rinsed off and dried well before you sow them.
+                        
+
+                    </h5>
+                </div>
+            </div>
+        </div>
+ 
+    </div>
+</body>
+ 
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css"
+        integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
+ 
+    <title>{{pred_output}} </title>
+ 
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+ 
+        .border img {
+            border-radius: 15px;
+            border: 2px solid black;
+        }
+        div{
+            text-align: justify;
+  text-justify: inter-word;
+
+
+        }
+    </style>
+</head>
+ 
+<body>
+ 
+    <div>
+        <h5>Vicky World Prediction</h5>
+    </div>
+ 
+    <div class="container my-2">
+        <div class="row mb-5">
+ 
+            <div class="col-sm" style="margin-bottom: 23px;">
+                <span class="border border-primary">
+                    <img src="{{ url_for('static',filename=user_image) }}" alt="User Image" class="img-thumbnail">
+                     
+                </span>
+            </div>
+ 
+            <div class="col-sm">
+ 
+                <div>
+                    <h1 style="padding: 15px; background-color: rgb(153, 156, 150); color: white;"
+                        class="text-center mb-5 content-h1 rounded">
+                        {{pred_output}} </h1>
+                </div>
+                <div class="details">
+ 
+                    <h5>
+                        The Tomato has Spider mites or two spotted spider mite</br></br> <br>
+                        <h2>
+                            What is Tomato Spider mites or two spotted spider mite?
+                        </h2>
+                        Spider mites (Tetranychus spp.) can ruin a tomato (Lycopersicon esculentum) garden when they colonize the undersides of leaves and suck plant juices. Tiny arachnids, spider mites are in the same family as spiders and ticks and are one of the major pest problems of tomato plants
+                        <br>
+                        These garden pests are as tiny as mites can be. In fact, one alone is barely visible to the naked eye, so you aren’t going to be able to inspect it and count its spots. But finding one mite alone is not very likely. By the time you see two-spotted mite damage and think about two-spotted spider mite control, you are likely to have a large mite population. These mites live on the underside of plant leaves.
+
+                        
+
+                        
+                        <h2>
+                            How to cure it?
+                        </h2>
+                        The best way to begin treating for two-spotted mites is to apply a pesticide specific to mites called a miticide. Ideally, you should start treating for two-spotted mites before your plants are seriously damaged. Apply the miticide for control of two-spotted mites every 7 days or so. Since mites can develop resistance to chemicals, switch to another type of miticide after three applications.
+
+               
+      
+                        
+                        
+                        
+
+ 
+
+                    </h5>
+                </div>
+            </div>
+        </div>
+ 
+    </div>
+</body>
+ 
+</html>

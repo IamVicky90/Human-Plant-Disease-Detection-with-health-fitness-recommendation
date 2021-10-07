@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css"
+        integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
+ 
+    <title>{{pred_output}} </title>
+ 
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+ 
+        .border img {
+            border-radius: 15px;
+            border: 2px solid black;
+        }
+        div{
+            text-align: justify;
+  text-justify: inter-word;
+
+
+        }
+    </style>
+</head>
+ 
+<body>
+ 
+    <div>
+        <h5>Vicky World Prediction</h5>
+    </div>
+ 
+    <div class="container my-2">
+        <div class="row mb-5">
+ 
+            <div class="col-sm" style="margin-bottom: 23px;">
+                <span class="border border-primary">
+                    <img src="{{ url_for('static',filename=user_image) }}" alt="User Image" class="img-thumbnail">
+                     
+                </span>
+            </div>
+ 
+            <div class="col-sm">
+ 
+                <div>
+                    <h1 style="padding: 15px; background-color: rgb(153, 156, 150); color: white;"
+                        class="text-center mb-5 content-h1 rounded">
+                        {{pred_output}} </h1>
+                </div>
+                <div class="details">
+ 
+                    <h5>
+                        The Tomato has Bacterial Spot</br></br> <br>
+                        <h2>
+                            What is Tomato Bacteria Spot?
+                        </h2>
+                        Bacterial spot is among the most devastating tomato diseases due to its ability to spread quickly and its resistance to control methods. Caused by four species of Xanthomonas, bacterial spot occurs all over the world wherever tomatoes are cultivated.
+<br>
+The disease causes leaf and fruit spots as well as defoliation, which leads to sun-scalded fruit and crop loss. Because of the diversity between the bacterial spot pathogens, the disease can occur at various temperatures, but is generally favored by temperatures in the range of 75 to 86 degrees F, as well as high precipitation.
+<br>
+It’s important not to eat fruit or vegetables that are infected with bacterial spot. Although people can’t catch bacterial spot, the lesions provide an opening for all kinds of pathogens that we can catch to enter the produce. That’s why you unfortunately must dispose of all infected crops by burning them or burying them so that it does not spread.
+                         
+                        <h2>
+                            How to cure it?
+                        </h2>
+                        One of the best ways to avoid bringing bacterial spot into the garden is to purchase certified disease-free tomato seeds. Also, gardeners should always use either a sterilized soil medium or one that is commercially made. If purchasing disease-free tomato seeds is not an option, it is important to try to sterilize the seeds as best you can, eliminating any bacteria that may exist on the seed’s surface and interior. To do this, fully submerge your tomato seeds in 1.3% sodium hypochlorite for one minute. A slightly more risky technique exists which could affect germination but helps to sterilize both the outer surface and interior of the tomato seed by submerging the seeds in 122 degree F water for 25 minutes.
+<br>
+Practicing crop rotation will help lessen the spread of bacterial spot. Because moist conditions and humidity attract bacterial spot, watering should be done in the early morning hours to allow plants plenty of time to dry out before the afternoon heat comes along. Gardeners should also be careful not to give their tomato plants too much water, and should try to keep leaves dry when watering their plants, focusing on watering the soil instead of the plant itself. Drip irrigation is recommended over standard overhead watering techniques. 
+<br>
+Aside from the cultural control preventative methods, copper fungicides that are designed to counter tomato diseases are highly recommended. Copper fungicides will deny bacterial spot growth for two to four weeks after application. Use this type of fungicide after planting the seeds but before moving the plants into the garden or field.
+<br>
+Copper sprays are most effective when used before any signs of the disease are present as a preventative treatment. Sprays should be applied before and after rains but not during downfall. If bacterial spots are noticed, spray the plants for seven to 10 days, and again the day before transplanting. Once placed in the garden or field, plants with bacterial spot should be sprayed for an additional week after being planted in the ground, every five to seven days when weather conditions are wet, and every ten days when the weather is dry.                   
+                        
+
+ 
+
+                    </h5>
+                </div>
+            </div>
+        </div>
+ 
+    </div>
+</body>
+ 
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css"
+        integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
+ 
+    <title>Fresh Cotton Leaf</title>
+ 
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+ 
+        .border img {
+            border-radius: 15px;
+            border: 2px solid black;
+        }
+    </style>
+</head>
+ 
+<body>
+ 
+    <div>
+        <h5>Vicky World Prediction</h5>
+    </div>
+ 
+    <div class="container my-2">
+        <div class="row mb-5">
+ 
+            <div class="col-sm" style="margin-bottom: 23px;">
+                <span class="border border-primary">
+                    <img src="{{ url_for('static',filename=user_image) }}" alt="User Image" class="img-thumbnail">
+                     
+                </span>
+            </div>
+ 
+            <div class="col-sm">
+ 
+                <div>
+                    <h1 style="padding: 15px; background-color: rgb(153, 156, 150); color: white;"
+                        class="text-center mb-5 content-h1 rounded">
+                        {{pred_output}} </h1>
+                </div>
+                <div class="details">
+ 
+                    <h5>
+                        The Cotton Plant is Healthy</br></br>
+                        Here is some studies about
+                        Common Pests and Diseases
+Diseases
+Category : Fungal
+Alternaria leaf spot Alternaria macrospora
+Symptoms
+Small, circular brown lesions on cotyledons and seedling leaves which expand and develop a concentric pattern; necrotic areas coalesce and often have a purple margin; centers of lesions may dry out and drop form the plant creating a "shot-hole" appearance on the leaves.
+Cause
+Fungus
+Comments
+Plants stressed by drought, nutrient deficiency and other pests are more susceptible to the disease; fungus spreads rapidly in dense canopies, especially during periods of warm, wet weather.
+Management
+Plow crop residue into the soil to reduce inoculum levels; provide plants with adequate irrigation and nutrients, particularly potassium; applications of appropriate foliar fungicides may be required on susceptible cultivars.
+<br>
+<br>
+Asochyta blight Asochyta gossypii
+<div class="col-sm" style="margin-bottom: 23px;">
+    <span class="border border-primary">
+        <img src="static/Cotton Disease Images/1436002-PPT.jpg" alt="Image" class="img-thumbnail">
+         
+    </span>
+</div>
+Ascochyta blight of cotton
+<div class="col-sm" style="margin-bottom: 23px;">
+    <span class="border border-primary">
+        <img src="static/Cotton Disease Images/1234097-PPT.jpg" alt="Image" class="img-thumbnail">
+         
+    </span>
+</div>
+Symptoms of Asochyta blight on cotton foliage
+<div class="col-sm" style="margin-bottom: 23px;">
+    <span class="border border-primary">
+        <img src="static/Cotton Disease Images/1234096-SMPT.jpg" alt="Image" class="img-thumbnail">
+         
+    </span>
+</div>
+Symptoms of Asochyta blight on cotton foliage
+<div class="col-sm" style="margin-bottom: 23px;">
+    <span class="border border-primary">
+        <img src="static/Cotton Disease Images/1234095-SMPT.jpg" alt="Image" class="img-thumbnail">
+         
+    </span>
+</div>
+Damage to cotton seedling.
+<div class="col-sm" style="margin-bottom: 23px;">
+    <span class="border border-primary">
+        <img src="static/Cotton Disease Images/1234087-SMPT.jpg" alt="Image" class="img-thumbnail">
+         
+    </span>
+</div>
+Symptoms of Asochyta blight on cotton foliage
+<div class="col-sm" style="margin-bottom: 23px;">
+    <span class="border border-primary">
+        <img src="static/Cotton Disease Images/1234053-PPT.jpg" alt="Image" class="img-thumbnail">
+         
+    </span>
+</div>
+Symptoms on lower leaf surface
+
+                    </h5>
+                </div>
+            </div>
+        </div>
+ 
+    </div>
+</body>
+ 
+</html>

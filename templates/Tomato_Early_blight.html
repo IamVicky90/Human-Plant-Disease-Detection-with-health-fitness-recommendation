@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css"
+        integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
+ 
+    <title>{{pred_output}} </title>
+ 
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+ 
+        .border img {
+            border-radius: 15px;
+            border: 2px solid black;
+        }
+        div{
+            text-align: justify;
+  text-justify: inter-word;
+
+
+        }
+    </style>
+</head>
+ 
+<body>
+ 
+    <div>
+        <h5>Vicky World Prediction</h5>
+    </div>
+ 
+    <div class="container my-2">
+        <div class="row mb-5">
+ 
+            <div class="col-sm" style="margin-bottom: 23px;">
+                <span class="border border-primary">
+                    <img src="{{ url_for('static',filename=user_image) }}" alt="User Image" class="img-thumbnail">
+                     
+                </span>
+            </div>
+ 
+            <div class="col-sm">
+ 
+                <div>
+                    <h1 style="padding: 15px; background-color: rgb(153, 156, 150); color: white;"
+                        class="text-center mb-5 content-h1 rounded">
+                        {{pred_output}} </h1>
+                </div>
+                <div class="details">
+ 
+                    <h5>
+                        The Tomato has Early Blight</br></br> <br>
+                        <h2>
+                            What is Tomato Early Blight?
+                        </h2>
+Early blight is a common tomato disease that is caused by the fungus Alternaria solani. Affecting nearly all parts of the tomato plant, including the stems, leaves and fruit, early blight is very common in areas with warm, moist weather conditions. Despite its misleading name, early blight can rear its head at any time during the growing season, causing unsightly damage to the leaves, stems, and eventually the fruit of your beloved tomato plants.
+<br>
+It is important to note that early blight and late blight are completely different diseases that are caused by different fungal pathogens. The main difference between the two is that early blight is easier to treat and prevent if signs of infection are spotted early enough. So, to help you remember the difference, if you catch early blight early enough, you may be able to revive your tomato plant, but if you catch late blight early, you are still too late to do anything about it.
+                        
+                        <h2>
+                            How to cure it?
+                        </h2>
+                        Follow a good fungicide regimen using a fungicide recommended specifically for early blight. Plant only disease-resistant varieties of tomatoes (such as Mountain Fresh, Mountain Supreme and Plum Daddy cultivars) after treating the beds with fungicide and removing all old plant debris completely, following fungicide instructions carefully.
+<br>
+                        The best way to keep early blight out of your garden is to practice control methods. Early blight is a soil borne fungus that occurs when the leaves of the tomato plant get too wet and get soil particles on the underside of the leaves. In order to keep the leaves from getting dirty, there are practices that you can try that will keep the leaves from touching the ground. Cover the soil with at least six inches of mulch during the growing season, putting a layer of protection in place, so that the leaves don’t touch the soil directly.
+                        <br>
+                        Remove old plant debris completely and discard of it in the garbage.  Do not compost affected plants or you will most likely be reintroducing the disease to your soil down the road. Rotate your crops often. Carefully space out your plants to promote good air circulation to help your plants dry out after a rain or watering.
+                        
+                        
+                        
+                        
+
+ 
+
+                    </h5>
+                </div>
+            </div>
+        </div>
+ 
+    </div>
+</body>
+ 
+</html>

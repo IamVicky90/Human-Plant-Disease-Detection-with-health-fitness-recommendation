@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css"
+        integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
+ 
+    <title>{{pred_output}} </title>
+ 
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+ 
+        .border img {
+            border-radius: 15px;
+            border: 2px solid black;
+        }
+        div{
+            text-align: justify;
+  text-justify: inter-word;
+
+
+        }
+    </style>
+</head>
+ 
+<body>
+ 
+    <div>
+        <h5>Vicky World Prediction</h5>
+    </div>
+ 
+    <div class="container my-2">
+        <div class="row mb-5">
+ 
+            <div class="col-sm" style="margin-bottom: 23px;">
+                <span class="border border-primary">
+                    <img src="{{ url_for('static',filename=user_image) }}" alt="User Image" class="img-thumbnail">
+                     
+                </span>
+            </div>
+ 
+            <div class="col-sm">
+ 
+                <div>
+                    <h1 style="padding: 15px; background-color: rgb(153, 156, 150); color: white;"
+                        class="text-center mb-5 content-h1 rounded">
+                        {{pred_output}} </h1>
+                </div>
+                <div class="details">
+ 
+                    <h5>
+                        The Tomato has Yellow Leaf Curl Virus</br></br> <br>
+                        <h2>
+                            What is Tomato Yellow Leaf Curl Virus?
+                        </h2>
+                        Tomato Leaf Curl Virus (TLCV) is a disease that causes tomato plants to wither, stop growing fruit, and eventually die. It is caused by whitefly infestations on the tomato plants. 
+                        <h2>
+                            How to cure it?
+                        </h2>
+                        Unfortunately, there is no cure for TLCV, so the only answer is removing infected plants to prevent the disease from spreading. Inspect your plants to find the symptoms of TLCV, and remove any that show symptoms. Prevent the disease by avoiding plants from disease-prone areas, keeping your garden clean, and using reflective mulch and row covers to keep whiteflies off the plants.
+                        <h2>
+                            Some precautions that may help
+                        </h2>
+                     
+                        Spray the plant thoroughly with the diluted copper fungicide at the leaf fall stage. Repeat the treatment between the late dormant and bud swell stage. Treat the plant for a third time at the pink bud stage. If using ready-to-use fungicide, spray the plant during its active growing period until the point of runoff to treat leaf curl
+                        
+
+ 
+
+                    </h5>
+                </div>
+            </div>
+        </div>
+ 
+    </div>
+</body>
+ 
+</html>
