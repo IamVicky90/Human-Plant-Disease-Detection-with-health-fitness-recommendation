@@ -18,15 +18,16 @@ class mongo_db_atlas_ops:
             email_validation_flag= True
         else:
             email_validation_flag= False
-        if password_validation.count()>0:
-            for item in password_validation:
-                pass_id=item.get('_id')
-                if email_id==pass_id:
-                    password_validation_flag= True
-                    break
-                else:
-                    password_validation_flag= False
-                    
+        if email_validation_flag:
+            if password_validation.count()>0:
+                for item in password_validation:
+                    pass_id=item.get('_id')
+                    if email_id==pass_id:
+                        password_validation_flag= True
+                        break
+                    else:
+                        password_validation_flag= False
+                        
         else:
             password_validation_flag= False
         return email_validation_flag, password_validation_flag

@@ -67,7 +67,6 @@ def generate_new_password():
         new_password =request.form['new_password']
         mongo_obj=mongo_db_atlas_ops()
         email_=email_retrival.pop()
-        print(email_)
         mongo_obj.update_password(email_,new_password)
         return "<h1>Password Generated Sucessfully now you can log-in</h1>"
     return redirect('/generate_new_password')
@@ -87,6 +86,8 @@ def submit_sign_up_form():
         city=request.form['city']
         state=request.form['state']
         zip=request.form['zip']
+        mail_obj=mail()
+        mail_obj.send_code(number,email)
         credentials_obj=credentials_handling.sign_up_credentials()
         dump_data=credentials_obj.dump_credentials_to_mongo_atlas(fname,lname,email,password,city,state,zip)
         if dump_data is None:
@@ -102,17 +103,14 @@ def sign_up_sucessfull():
 #load model
 model=load_model("Model/Various Plant Disease Detection Model1.h5")
 
-print('@@ Model loaded')
 
 
 def pred_plant_dieas(plant):
   test_image = load_img(plant, target_size = (150, 150)) # load image 
-  print("@@ Got Image for prediction")
   test_image = img_to_array(test_image)/255 
   test_image = np.expand_dims(test_image, axis = 0) # change dimention 3D to 4D
    
   result = model.predict(test_image).round(3) 
-  print('@@ Raw result = ', result)
    
   pred = np.argmax(result) 
  
@@ -173,13 +171,10 @@ def predict():
     if request.method == 'POST':
         file = request.files['image'] # fet input
         filename = file.filename        
-        print("@@ Input posted = ", filename)
         file_path = os.path.join('static','user_upload', filename)
         file.save(file_path)
 
-        print("@@ Predicting class......")
         pred, output_page = pred_plant_dieas(plant=file_path)
-        print("File Path is : ",file_path)
                     
         return render_template(output_page, pred_output = pred, user_image = 'user_upload'+'/'+filename)
     return redirect('/')
@@ -228,7 +223,6 @@ def heart():
 def heart_predict():
     if home_login_flag:
         model = pickle.load(open('Model/Heart_disease_ab_0.90_model.sav', 'rb'))
-        print("@@ Heart Disease Model Loaded")
         if request.method == 'POST':
             age=request.form['age']
             
@@ -253,7 +247,6 @@ def heart_predict():
                     X.append(np.log(float(value)+1))
                 output=model.predict([X])
             except Exception as e:
-                print("@@",e)
                 return render_template('heart.html',prediction_text="Some unknown error occured please input the values in number or contact the develpor if it still occurs")
 
             if output==0:
@@ -277,7 +270,6 @@ def breast():
 def breast_predict():
     if home_login_flag:
         model = pickle.load(open('Model/brest_cancer_rf_model.sav', 'rb'))
-        print("@@ Breast Cancer Model Loaded")
         if request.method == 'POST':
             try:
                 mean_radius=float(request.form['mean_radius'])
@@ -286,7 +278,6 @@ def breast_predict():
                 mean_area=float(request.form['mean_area'])
                 mean_smoothness=float(request.form['mean_smoothness'])
             except Exception as e:
-                print("@@",e)
                 return render_template('breast.html',prediction_text="Some unknown error occured please input the values in number or contact the develpor if it still occurs")
             
             output=model.predict([[mean_radius,mean_texture,mean_perimeter,mean_area,mean_smoothness]])
@@ -330,7 +321,6 @@ def diabtes():
 def diabtes_predict():
     if home_login_flag:
         model = pickle.load(open('Model/diabetes_xg_0.76_model.sav', 'rb'))
-        print("@@ Diabtes Model Loaded")
         if request.method == 'POST':
             try:
                 Pregnancies=float(request.form['Pregnancies'])
@@ -342,7 +332,6 @@ def diabtes_predict():
                 DiabetesPedigreeFunction=float(request.form['DiabetesPedigreeFunction'])
                 Age=float(request.form['Age'])
             except Exception as e:
-                print("@@",e)
                 return render_template('diabtes.html',prediction_text="Some unknown error occured please input the values in number or contact the develpor if it still occurs")
             df=pd.DataFrame([[Pregnancies,Glucose,BloodPressure,SkinThickness,Insulin,BMI,DiabetesPedigreeFunction,Age]],columns=['Pregnancies', 'Glucose', 'BloodPressure', 'SkinThickness', 'Insulin', 'BMI', 'DiabetesPedigreeFunction', 'Age'])
             output=model.predict(df)
@@ -384,7 +373,6 @@ def kidney():
 def kidney_predict():
     if home_login_flag:
         model = pickle.load(open('Model/kidney_disease_ab1_model.sav', 'rb'))
-        print("@@ Kidney Model Loaded")
         if request.method=='POST':
             try:
                 age=float(request.form['age'])
@@ -402,7 +390,6 @@ def kidney_predict():
                 wc=float(request.form['wc'])
                 rc=float(request.form['rc'])
             except Exception as e:
-                print("@@",e)
                 return render_template('kidney.html',prediction_text="Some unknown error occured please input the values in number or contact the develpor if it still occurs")
             pc_=request.form['pc']
             if pc_=='normal':
