@@ -8,12 +8,9 @@ import numpy as np
 import os
 from tensorflow.keras.preprocessing.image import img_to_array,load_img
 from tensorflow.keras.models import load_model
-import jsonify
 import requests
 import pickle
-import sklearn
 import pandas as pd
-import xgboost
 from werkzeug.utils import secure_filename
 app = Flask(__name__)
 
@@ -23,7 +20,7 @@ def login():
 @app.route('/failed_login',methods=['GET','POST'])
 def failed_login():
     return render_template('failed_login.html')
-@app.route('/home',methods=['POST'])
+@app.route('/home',methods=['POST','GET'])
 def home():
     if request.method =='POST':
         email=request.form['email']
@@ -36,7 +33,8 @@ def home():
             return render_template('home.html')
         mail_obj.failed_login_mail(email,email_validation_flag)
         return redirect('/failed_login')
-    return redirect('/')
+    else:
+        return redirect('/')
 @app.route('/forget_password',methods=['GET','POST'])
 def forget_password():
     return render_template("Password_Forget.html")
@@ -293,7 +291,7 @@ def predict_pnemonia():
         # Save the file to ./uploads
         basepath = os.path.dirname(__file__)
         file_path = os.path.join(
-        basepath, 'uploads', secure_filename(f.filename))
+        basepath, 'static','user_upload', secure_filename(f.filename))
         f.save(file_path)
 
         # Make prediction
@@ -340,7 +338,7 @@ def predict_skin():
         # Save the file to ./uploads
         basepath = os.path.dirname(__file__)
         file_path = os.path.join(
-        basepath, 'uploads', secure_filename(f.filename))
+        basepath, 'static','user_upload', secure_filename(f.filename))
         f.save(file_path)
 
         # Make prediction
@@ -444,9 +442,6 @@ def kidney_predict():
             return render_template('kidney.html',prediction_text="Result: \nPrediction Result: Don't worry You don't have any Kidney disease!")
         elif output==1:
             return render_template('kidney.html',prediction_text="Result: \nWe found something wrong with your kidney, please consult with the doctor")
-
-
-
 
 
 # ...................................Health APP Ended.................................................
