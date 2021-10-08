@@ -8,18 +8,17 @@ import numpy as np
 import os
 from tensorflow.keras.preprocessing.image import img_to_array,load_img
 from tensorflow.keras.models import load_model
-import requests
 import pickle
 import pandas as pd
 from werkzeug.utils import secure_filename
 app = Flask(__name__)
-
 @app.route('/',methods=['GET','POST'])
 def login():
     return render_template('login.html')
 @app.route('/failed_login',methods=['GET','POST'])
 def failed_login():
     return render_template('failed_login.html')
+home_login_flag=[False]
 @app.route('/home',methods=['POST','GET'])
 def home():
     if request.method =='POST':
@@ -30,6 +29,7 @@ def home():
         mail_obj=mail()
         if email_validation_flag==True and password_validation_flag==True:
             mail_obj.user_login_mail(email)
+            home_login_flag[0]=True 
             return render_template('home.html')
         mail_obj.failed_login_mail(email,email_validation_flag)
         return redirect('/failed_login')
@@ -40,31 +40,37 @@ def forget_password():
     return render_template("Password_Forget.html")
 email_retrival=[]
 number=random.randint(10000,200000)
-@app.route('/send_code',methods=['POST'])
+@app.route('/send_code',methods=['POST','GET'])
 def send_code():
-    email=request.form['email']
-    user_validation=credentials_validations.user_validation(email,'password')
-    email_validation_flag, _=user_validation.validate_password_and_email()
-    email_retrival.append(email)
-    if email_validation_flag:
-        mail_obj=mail()
-        mail_obj.send_code(number,email)
-        return render_template("code_validation.html")
-    return "<h1>Your Email is not registered with us please Sign-Up with Us!</h1>"
+    if request.method == 'POST':
+        email=request.form['email']
+        user_validation=credentials_validations.user_validation(email,'password')
+        email_validation_flag, _=user_validation.validate_password_and_email()
+        email_retrival.append(email)
+        if email_validation_flag:
+            mail_obj=mail()
+            mail_obj.send_code(number,email)
+            return render_template("code_validation.html")
+        return "<h1>Your Email is not registered with us please Sign-Up with Us!</h1>"
+    return redirect('/send_code')
 @app.route('/validate_code',methods=['GET','POST'])
 def validate_code():
-    code=request.form['code']
-    if str(code) == str(number):
-        return render_template('new_password.html')
-    return "<h1>Code is not correct Please try again!</h1>"
+    if request.method == 'POST':
+        code=request.form['code']
+        if str(code) == str(number):
+            return render_template('new_password.html')
+        return "<h1>Code is not correct Please try again!</h1>"
+    return redirect('/validate_code')
 @app.route('/generate_new_password',methods=['GET','POST'])
 def generate_new_password():
-    new_password =request.form['new_password']
-    mongo_obj=mongo_db_atlas_ops()
-    email_=email_retrival.pop()
-    print(email_)
-    mongo_obj.update_password(email_,new_password)
-    return "<h1>Password Generated Sucessfully now you can log-in</h1>"
+    if request.method == 'POST':
+        new_password =request.form['new_password']
+        mongo_obj=mongo_db_atlas_ops()
+        email_=email_retrival.pop()
+        print(email_)
+        mongo_obj.update_password(email_,new_password)
+        return "<h1>Password Generated Sucessfully now you can log-in</h1>"
+    return redirect('/generate_new_password')
 @app.route('/signup',methods=['GET','POST'])
 def signup():
     return render_template('signup.html')
@@ -154,28 +160,29 @@ def pred_plant_dieas(plant):
      
  
 # render index.html page
-@app.route("/Plant_disease_index", methods=['GET', 'POST'])
+@app.route("/Plant_disease_index", methods=[ 'POST','GET'])
 def Plant_disease_index():
-  # return("Hellow World")
-  return render_template("Plant_disease_index.html")
+    if home_login_flag[0]:
+        return render_template("Plant_disease_index.html")
+    return redirect('/')
      
   
 # get input image from client then predict class and render respective .html page for solution
 @app.route("/predict", methods = ['GET','POST'])
 def predict():
+    if request.method == 'POST':
+        file = request.files['image'] # fet input
+        filename = file.filename        
+        print("@@ Input posted = ", filename)
+        file_path = os.path.join('static','user_upload', filename)
+        file.save(file_path)
 
-  if request.method == 'POST':
-    file = request.files['image'] # fet input
-    filename = file.filename        
-    print("@@ Input posted = ", filename)
-    file_path = os.path.join('static','user_upload', filename)
-    file.save(file_path)
- 
-    print("@@ Predicting class......")
-    pred, output_page = pred_plant_dieas(plant=file_path)
-    print("File Path is : ",file_path)
-               
-    return render_template(output_page, pred_output = pred, user_image = 'user_upload'+'/'+filename)
+        print("@@ Predicting class......")
+        pred, output_page = pred_plant_dieas(plant=file_path)
+        print("File Path is : ",file_path)
+                    
+        return render_template(output_page, pred_output = pred, user_image = 'user_upload'+'/'+filename)
+    return redirect('/')
 # ............................Plant APP Ended........................................................
 
 # ...................................Health APP Started...............................................
@@ -208,240 +215,267 @@ def pred_skin(img_path):
 # render index.html page
 @app.route("/health_index", methods=['GET', 'POST'])
 def health_index():
-    return render_template('health_index.html')
+    if home_login_flag:
+        return render_template('health_index.html')
+    return redirect('/')
 @app.route("/heart", methods=['GET', 'POST'])
 def heart():
-    return render_template('heart.html')
+    if home_login_flag:
+        return render_template('heart.html')
+    return redirect('/')
 
 @app.route('/heart_predict',methods=["GET","POST"])
 def heart_predict():
-    model = pickle.load(open('Model/Heart_disease_ab_0.90_model.sav', 'rb'))
-    print("@@ Heart Disease Model Loaded")
-    if request.method == 'POST':
-        age=request.form['age']
-        
-        sex=request.form['sex']
-        cp=request.form['cp']
-        trestbps=request.form['trestbps']
-        chol=request.form['chol']
-        fbs=request.form['fbs']
-        restecg=request.form['restecg']
-        thalach=request.form['thalach']
-        exang=request.form['exang']
-        oldpeak=request.form['oldpeak']
-        slope=request.form['slope']
+    if home_login_flag:
+        model = pickle.load(open('Model/Heart_disease_ab_0.90_model.sav', 'rb'))
+        print("@@ Heart Disease Model Loaded")
+        if request.method == 'POST':
+            age=request.form['age']
+            
+            sex=request.form['sex']
+            cp=request.form['cp']
+            trestbps=request.form['trestbps']
+            chol=request.form['chol']
+            fbs=request.form['fbs']
+            restecg=request.form['restecg']
+            thalach=request.form['thalach']
+            exang=request.form['exang']
+            oldpeak=request.form['oldpeak']
+            slope=request.form['slope']
 
-        ca=request.form['ca']
+            ca=request.form['ca']
 
-        thal=request.form['thal']
-        values=[age,sex,cp,trestbps,chol,fbs,restecg,thalach,exang,oldpeak,slope,ca,thal]
-        X=[]
-        try:
-            for value in values:
-                X.append(np.log(float(value)+1))
-            output=model.predict([X])
-        except Exception as e:
-            print("@@",e)
-            return render_template('heart.html',prediction_text="Some unknown error occured please input the values in number or contact the develpor if it still occurs")
+            thal=request.form['thal']
+            values=[age,sex,cp,trestbps,chol,fbs,restecg,thalach,exang,oldpeak,slope,ca,thal]
+            X=[]
+            try:
+                for value in values:
+                    X.append(np.log(float(value)+1))
+                output=model.predict([X])
+            except Exception as e:
+                print("@@",e)
+                return render_template('heart.html',prediction_text="Some unknown error occured please input the values in number or contact the develpor if it still occurs")
 
-        if output==0:
-            return render_template('heart.html',prediction_text="Prediction Result: Don't worry You don't have any disease!")
-        elif output==1:
-            return render_template('heart.html',prediction_text="We found something wrong with you please consult with the doctor")
-
-
+            if output==0:
+                return render_template('heart.html',prediction_text="Prediction Result: Don't worry You don't have any disease!")
+            elif output==1:
+                return render_template('heart.html',prediction_text="We found something wrong with you please consult with the doctor")
 
 
-    else:
-        return render_template('heart.html')
+
+
+        else:
+            return render_template('heart.html')
+    return redirect('/')
 
 @app.route("/breast", methods=['GET', 'POST'])
 def breast():
-    return render_template('breast.html')
+    if home_login_flag:
+        return render_template('breast.html')
+    return redirect('/')
 @app.route("/breast_predict", methods=['GET', 'POST'])
 def breast_predict():
-    model = pickle.load(open('Model/brest_cancer_rf_model.sav', 'rb'))
-    print("@@ Breast Cancer Model Loaded")
-    if request.method == 'POST':
-        try:
-            mean_radius=float(request.form['mean_radius'])
-            mean_texture=float(request.form['mean_texture'])
-            mean_perimeter=float(request.form['mean_perimeter'])
-            mean_area=float(request.form['mean_area'])
-            mean_smoothness=float(request.form['mean_smoothness'])
-        except Exception as e:
-            print("@@",e)
-            return render_template('breast.html',prediction_text="Some unknown error occured please input the values in number or contact the develpor if it still occurs")
-        
-        output=model.predict([[mean_radius,mean_texture,mean_perimeter,mean_area,mean_smoothness]])
-        if output==0:
-            return render_template('breast.html',prediction_text="Prediction Result: Don't worry You don't have any disease!")
-        elif output==1:
-            return render_template('breast.html',prediction_text="We found something wrong with you please consult with the doctor")
+    if home_login_flag:
+        model = pickle.load(open('Model/brest_cancer_rf_model.sav', 'rb'))
+        print("@@ Breast Cancer Model Loaded")
+        if request.method == 'POST':
+            try:
+                mean_radius=float(request.form['mean_radius'])
+                mean_texture=float(request.form['mean_texture'])
+                mean_perimeter=float(request.form['mean_perimeter'])
+                mean_area=float(request.form['mean_area'])
+                mean_smoothness=float(request.form['mean_smoothness'])
+            except Exception as e:
+                print("@@",e)
+                return render_template('breast.html',prediction_text="Some unknown error occured please input the values in number or contact the develpor if it still occurs")
+            
+            output=model.predict([[mean_radius,mean_texture,mean_perimeter,mean_area,mean_smoothness]])
+            if output==0:
+                return render_template('breast.html',prediction_text="Prediction Result: Don't worry You don't have any disease!")
+            elif output==1:
+                return render_template('breast.html',prediction_text="We found something wrong with you please consult with the doctor")
 
-    return render_template('breast.html')
+        return render_template('breast.html')
+    return redirect('/')
 @app.route("/pnemonia", methods=['GET', 'POST'])
 def pnemonia():
-    return render_template('pnemonia.html')
+    if home_login_flag:
+        return render_template('pnemonia.html')
+    return redirect('/')
 @app.route("/predict_pnemonia", methods=['GET', 'POST'])
 def predict_pnemonia():
-    if request.method=='POST':
-        f = request.files['file']
+    if home_login_flag:
+        if request.method=='POST':
+            f = request.files['file']
 
-        # Save the file to ./uploads
-        basepath = os.path.dirname(__file__)
-        file_path = os.path.join(
-        basepath, 'static','user_upload', secure_filename(f.filename))
-        f.save(file_path)
+            # Save the file to ./uploads
+            basepath = os.path.dirname(__file__)
+            file_path = os.path.join(
+            basepath, 'static','user_upload', secure_filename(f.filename))
+            f.save(file_path)
 
-        # Make prediction
-        preds = pred_pnemoian(file_path)
-        result=preds
-        return result
+            # Make prediction
+            preds = pred_pnemoian(file_path)
+            result=preds
+            return result
+        return redirect('/')
+    return redirect('/')
     
 @app.route("/diabtes", methods=['GET', 'POST'])
 def diabtes():
-    return render_template('diabtes.html')
+    if home_login_flag:
+        return render_template('diabtes.html')
+    return redirect('/')
 @app.route("/diabtes_predict", methods=['GET', 'POST'])
 def diabtes_predict():
-    model = pickle.load(open('Model/diabetes_xg_0.76_model.sav', 'rb'))
-    print("@@ Diabtes Model Loaded")
-    if request.method == 'POST':
-        try:
-            Pregnancies=float(request.form['Pregnancies'])
-            Glucose=float(request.form['Glucose'])
-            BloodPressure=float(request.form['BloodPressure'])
-            SkinThickness=float(request.form['SkinThickness'])
-            Insulin=float(request.form['Insulin'])
-            BMI=float(request.form['BMI'])
-            DiabetesPedigreeFunction=float(request.form['DiabetesPedigreeFunction'])
-            Age=float(request.form['Age'])
-        except Exception as e:
-            print("@@",e)
-            return render_template('diabtes.html',prediction_text="Some unknown error occured please input the values in number or contact the develpor if it still occurs")
-        df=pd.DataFrame([[Pregnancies,Glucose,BloodPressure,SkinThickness,Insulin,BMI,DiabetesPedigreeFunction,Age]],columns=['Pregnancies', 'Glucose', 'BloodPressure', 'SkinThickness', 'Insulin', 'BMI', 'DiabetesPedigreeFunction', 'Age'])
-        output=model.predict(df)
-        if output==0:
-            return render_template('diabtes.html',prediction_text="Prediction Result: Don't worry You don't have diabtes!")
-        elif output==1:
-            return render_template('diabtes.html',prediction_text="We found that you have diabtes, please consult with the doctor")
+    if home_login_flag:
+        model = pickle.load(open('Model/diabetes_xg_0.76_model.sav', 'rb'))
+        print("@@ Diabtes Model Loaded")
+        if request.method == 'POST':
+            try:
+                Pregnancies=float(request.form['Pregnancies'])
+                Glucose=float(request.form['Glucose'])
+                BloodPressure=float(request.form['BloodPressure'])
+                SkinThickness=float(request.form['SkinThickness'])
+                Insulin=float(request.form['Insulin'])
+                BMI=float(request.form['BMI'])
+                DiabetesPedigreeFunction=float(request.form['DiabetesPedigreeFunction'])
+                Age=float(request.form['Age'])
+            except Exception as e:
+                print("@@",e)
+                return render_template('diabtes.html',prediction_text="Some unknown error occured please input the values in number or contact the develpor if it still occurs")
+            df=pd.DataFrame([[Pregnancies,Glucose,BloodPressure,SkinThickness,Insulin,BMI,DiabetesPedigreeFunction,Age]],columns=['Pregnancies', 'Glucose', 'BloodPressure', 'SkinThickness', 'Insulin', 'BMI', 'DiabetesPedigreeFunction', 'Age'])
+            output=model.predict(df)
+            if output==0:
+                return render_template('diabtes.html',prediction_text="Prediction Result: Don't worry You don't have diabtes!")
+            elif output==1:
+                return render_template('diabtes.html',prediction_text="We found that you have diabtes, please consult with the doctor")
 
-    return render_template('diabtes.html')
+        return render_template('diabtes.html')
+    return redirect('/')
 @app.route("/skin", methods=['GET', 'POST'])
 def skin():
-    return render_template('skin.html')
+    if home_login_flag:
+        return render_template('skin.html')
+    return redirect('/')
 @app.route("/predict_skin", methods=['GET', 'POST'])
 def predict_skin():
-    if request.method=='POST':
-        f = request.files['file']
+    if home_login_flag:
+        if request.method=='POST':
+            f = request.files['file']
 
-        # Save the file to ./uploads
-        basepath = os.path.dirname(__file__)
-        file_path = os.path.join(
-        basepath, 'static','user_upload', secure_filename(f.filename))
-        f.save(file_path)
+            # Save the file to ./uploads
+            basepath = os.path.dirname(__file__)
+            file_path = os.path.join(
+            basepath, 'static','user_upload', secure_filename(f.filename))
+            f.save(file_path)
 
-        # Make prediction
-        preds = pred_skin(file_path)
-        result=preds
-        return result
+            # Make prediction
+            preds = pred_skin(file_path)
+            result=preds
+            return result
+    return redirect('/')
 @app.route("/kidney", methods=['GET', 'POST'])
 def kidney():
-    return render_template('kidney.html')
+    if home_login_flag:
+        return render_template('kidney.html')
+    return redirect('/')
 @app.route("/kidney_predict", methods=['GET', 'POST'])
 def kidney_predict():
-    model = pickle.load(open('Model/kidney_disease_ab1_model.sav', 'rb'))
-    print("@@ Kidney Model Loaded")
-    if request.method=='POST':
-        try:
-            age=float(request.form['age'])
-            bp=float(request.form['bp'])
-            sg=float(request.form['sg'])
-            al=float(request.form['al'])
-            su=float(request.form['su'])
-            bgr=float(request.form['bgr'])
-            bu=float(request.form['bu'])
-            sc=float(request.form['sc'])
-            sod=float(request.form['sod'])
-            pot=float(request.form['pot'])
-            hemo=float(request.form['hemo'])
-            pcv=float(request.form['pcv'])
-            wc=float(request.form['wc'])
-            rc=float(request.form['rc'])
-        except Exception as e:
-            print("@@",e)
-            return render_template('kidney.html',prediction_text="Some unknown error occured please input the values in number or contact the develpor if it still occurs")
-        pc_=request.form['pc']
-        if pc_=='normal':
-            pc_normal=1
-            pc_nan=0
-        elif pc_=='nan':
-            pc_normal=0
-            pc_nan=1
-        else:
-            pc_normal=0
-            pc_nan=0
-        pcc_=request.form['pcc']
-        if pcc_=='present':
-            pcc_present=1
-        else:
-            pcc_present=0
-        ba_=request.form['ba']
-        if ba_=='present':
-            ba_present=1
-        else:
-            ba_present=0    
-        htn_=request.form['htn']
-        if htn_=='yes':
-            htn_yes=1
-        else:
-            htn_yes=0
-        dm_=request.form['dm']
-        if dm_=='yes':
-            dm_no=0
-            dm_yes=1
-        else:
-            dm_no=0
-            dm_yes=0
+    if home_login_flag:
+        model = pickle.load(open('Model/kidney_disease_ab1_model.sav', 'rb'))
+        print("@@ Kidney Model Loaded")
+        if request.method=='POST':
+            try:
+                age=float(request.form['age'])
+                bp=float(request.form['bp'])
+                sg=float(request.form['sg'])
+                al=float(request.form['al'])
+                su=float(request.form['su'])
+                bgr=float(request.form['bgr'])
+                bu=float(request.form['bu'])
+                sc=float(request.form['sc'])
+                sod=float(request.form['sod'])
+                pot=float(request.form['pot'])
+                hemo=float(request.form['hemo'])
+                pcv=float(request.form['pcv'])
+                wc=float(request.form['wc'])
+                rc=float(request.form['rc'])
+            except Exception as e:
+                print("@@",e)
+                return render_template('kidney.html',prediction_text="Some unknown error occured please input the values in number or contact the develpor if it still occurs")
+            pc_=request.form['pc']
+            if pc_=='normal':
+                pc_normal=1
+                pc_nan=0
+            elif pc_=='nan':
+                pc_normal=0
+                pc_nan=1
+            else:
+                pc_normal=0
+                pc_nan=0
+            pcc_=request.form['pcc']
+            if pcc_=='present':
+                pcc_present=1
+            else:
+                pcc_present=0
+            ba_=request.form['ba']
+            if ba_=='present':
+                ba_present=1
+            else:
+                ba_present=0    
+            htn_=request.form['htn']
+            if htn_=='yes':
+                htn_yes=1
+            else:
+                htn_yes=0
+            dm_=request.form['dm']
+            if dm_=='yes':
+                dm_no=0
+                dm_yes=1
+            else:
+                dm_no=0
+                dm_yes=0
 
-        cad_=request.form['cad']
-        if cad_=='yes':
-            cad_yes=1
-        else:
-            cad_yes=0
-        appet_=request.form['appet']
-        if appet_=='poor':
-            appet_poor=1
-        else:
-            appet_poor=0
-        pe_=request.form['pe']
-        if pe_=='yes':
-            pe_yes=1
-        else:
-            pe_yes=0
-        ane_=request.form['ane']
-        if ane_=='yes':
-            ane_yes=1
-        else:
-            ane_yes=0
-        rbc_=request.form['rbc']
-        if rbc_=='normal':
-            rbc_normal=1
-            rbc_nan=0
-        elif rbc_=='nan':
-            rbc_normal=0
-            rbc_nan=1
-        else:
-            rbc_normal=0
-            rbc_nan=0
-        X=pd.DataFrame([[age, bp, sg, al, su, bgr, bu, sc, sod, pot, hemo,pcv, wc, rc, rbc_normal, rbc_nan, pc_normal, pc_nan,pcc_present, ba_present, htn_yes, dm_no, dm_yes, cad_yes,appet_poor, pe_yes, ane_yes]],columns=['age', 'bp', 'sg', 'al', 'su', 'bgr', 'bu', 'sc', 'sod', 'pot', 'hemo','pcv', 'wc', 'rc', 'rbc_normal', 'rbc_nan', 'pc_normal', 'pc_nan','pcc_present', 'ba_present', 'htn_yes', 'dm_no', 'dm_yes', 'cad_yes','appet_poor', 'pe_yes', 'ane_yes'])
+            cad_=request.form['cad']
+            if cad_=='yes':
+                cad_yes=1
+            else:
+                cad_yes=0
+            appet_=request.form['appet']
+            if appet_=='poor':
+                appet_poor=1
+            else:
+                appet_poor=0
+            pe_=request.form['pe']
+            if pe_=='yes':
+                pe_yes=1
+            else:
+                pe_yes=0
+            ane_=request.form['ane']
+            if ane_=='yes':
+                ane_yes=1
+            else:
+                ane_yes=0
+            rbc_=request.form['rbc']
+            if rbc_=='normal':
+                rbc_normal=1
+                rbc_nan=0
+            elif rbc_=='nan':
+                rbc_normal=0
+                rbc_nan=1
+            else:
+                rbc_normal=0
+                rbc_nan=0
+            X=pd.DataFrame([[age, bp, sg, al, su, bgr, bu, sc, sod, pot, hemo,pcv, wc, rc, rbc_normal, rbc_nan, pc_normal, pc_nan,pcc_present, ba_present, htn_yes, dm_no, dm_yes, cad_yes,appet_poor, pe_yes, ane_yes]],columns=['age', 'bp', 'sg', 'al', 'su', 'bgr', 'bu', 'sc', 'sod', 'pot', 'hemo','pcv', 'wc', 'rc', 'rbc_normal', 'rbc_nan', 'pc_normal', 'pc_nan','pcc_present', 'ba_present', 'htn_yes', 'dm_no', 'dm_yes', 'cad_yes','appet_poor', 'pe_yes', 'ane_yes'])
 
-        X_col=X.columns[[ True,  True, False,  True, False,  True,  True,  True,  True,True,  True,  True,True,  True,  True,  True,  True, False,False, False,  True, False,  True,  True, False, False,True]]
-        output=model.predict(X[X_col])
-        if output==0:
-            return render_template('kidney.html',prediction_text="Result: \nPrediction Result: Don't worry You don't have any Kidney disease!")
-        elif output==1:
-            return render_template('kidney.html',prediction_text="Result: \nWe found something wrong with your kidney, please consult with the doctor")
+            X_col=X.columns[[ True,  True, False,  True, False,  True,  True,  True,  True,True,  True,  True,True,  True,  True,  True,  True, False,False, False,  True, False,  True,  True, False, False,True]]
+            output=model.predict(X[X_col])
+            if output==0:
+                return render_template('kidney.html',prediction_text="Result: \nPrediction Result: Don't worry You don't have any Kidney disease!")
+            elif output==1:
+                return render_template('kidney.html',prediction_text="Result: \nWe found something wrong with your kidney, please consult with the doctor")
+    return redirect('/')
 
 
 # ...................................Health APP Ended.................................................

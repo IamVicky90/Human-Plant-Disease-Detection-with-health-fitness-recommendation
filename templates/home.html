@@ -1,14 +1,108 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vicky AI Production</title>
+	<title>Welcome</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+
+	<link rel="stylesheet" href="static/css/owl.carousel.min.css">
+	<link rel="stylesheet" href="static/owl.theme.default.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.5.6/css/ionicons.min.css">
+	<link rel="stylesheet" href="static/css/crousal_style.css">
 </head>
+
 <body>
-    <h1>
-        Sucessfully Login, Work in Progress
-    </h1>
+		
+		<section class="ftco-section">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<h2 class="heading-section mb-5 pb-md-4">Welcome To Vicky AI Production</h2>
+					</div>
+					<div class="col-md-12">
+						<div class="featured-carousel owl-carousel">
+							<div class="item">
+								<div class="blog-entry">
+									<a method='post' href="{{url_for('Plant_disease_index')}}" class="block-20 d-flex align-items-start"
+									style="background-image: url('static/Images/image_1.jpg');">
+									<div class="meta-date text-center p-2">
+										<span class="">Vicky</span>
+										<span class="">AI</span>
+										<span class="">Production</span>
+									</div>
+								</a>
+								<div class="text border border-top-0 p-4">
+									<h3 class="heading"><a href="{url_for('Plant_disease_index')}}">Plant Disease Prediction along with sugestions.</a></h3>
+									<p>This is a simple image classification Flask app trained on the top of Keras API. The trained model (Plant-Disease-Prediction/Model/Various Plant Disease Detection Model1.h5) takes an image (from Plant Disease) as an input and predict the Disease of the purticular plant</p>
+									<div class="d-flex align-items-center mt-4">
+										<p class="mb-0"><a method='post' href="{{url_for('Plant_disease_index')}}" class="btn btn-primary">Click Here To Start <span
+											class="ion-ios-arrow-round-forward"></span></a></p>
+										
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="item">
+								<div class="blog-entry">
+									<a href="{{url_for('health_index')}}" class="block-20 d-flex align-items-start"
+									style="background-image: url('static/Images/image_2.jpg');">
+									<div class="meta-date text-center p-2">
+										<span class="">Vicky</span>
+										<span class="">AI</span>
+										<span class="">Production</span>
+									</div>
+								</a>
+								<div class="text border border-top-0 p-4">
+									<h3 class="heading"><a href="{{url_for('health_index')}}">Human Disease Prediction</a></h3>
+									<p>This is a six medical prediction applications based on AI. For this I use 4 Machine Learning and 1 Deep Learning Models on Flask app trained on top of Keras API. Just fill the information then it will predict you whether you have some disease or not, provided the data that you have given to it.</p>
+									<div class="d-flex align-items-center mt-4">
+										<p class="mb-0"><a href="{{url_for('health_index')}}" class="btn btn-primary">Click Here To Start <span
+											class="ion-ios-arrow-round-forward"></span></a></p>
+											
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="item">
+								<div class="blog-entry">
+									<a href="#" class="block-20 d-flex align-items-start"
+									style="background-image: url('static/Images/image_3.jpg');">
+									<div class="meta-date text-center p-2">
+										<span class="">Vicky</span>
+										<span class="">AI</span>
+										<span class="">Production</span>
+									</div>
+								</a>
+								<div class="text border border-top-0 p-4">
+									<h3 class="heading"><a href="#">Fitness Prediction and suggestions(In development process).</a></h3>
+									<p>Far far away, behind the word mountains, far from the countries Vokalia and
+										Consonantia, there live the blind texts.
+										Far far away, behind the word mountains, far from the countries Vokalia 
+										(It is in development process)</p>
+										<div class="d-flex align-items-center mt-4">
+											<p class="mb-0"><a href="#" class="btn btn-primary">Click Here To Start <span
+													class="ion-ios-arrow-round-forward"></span></a></p>
+													
+												</div>
+											</div>
+										</div>
+									</div>
+									
+								</div>
+							</div>
+			</div>
+		</div>
+	</section>
+	
+	<script src="static/js/crousal_jquery.min.js"></script>
+	<script src="static/js/crousal_popper.js"></script>
+	<script src="static/js/crousal_bootstrap.min.js"></script>
+	<script src="static/js/crousal_owl.carousel.min.js"></script>
+	<script src="static/js/crousal_main.js"></script>
 </body>
+
 </html>
