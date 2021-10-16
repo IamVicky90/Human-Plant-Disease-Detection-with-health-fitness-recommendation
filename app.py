@@ -11,6 +11,7 @@ from tensorflow.keras.models import load_model
 import pickle
 import pandas as pd
 from werkzeug.utils import secure_filename
+os.environ['TF_FORCE_GPU_ALLOW_GROWTH'] = 'true'
 app = Flask(__name__)
 @app.route('/',methods=['GET','POST'])
 def login():
@@ -86,8 +87,8 @@ def submit_sign_up_form():
         city=request.form['city']
         state=request.form['state']
         zip=request.form['zip']
-        mail_obj=mail()
-        mail_obj.send_code(number,email)
+        # mail_obj=mail()
+        # mail_obj.send_code(number,email)
         credentials_obj=credentials_handling.sign_up_credentials()
         dump_data=credentials_obj.dump_credentials_to_mongo_atlas(fname,lname,email,password,city,state,zip)
         if dump_data is None:
@@ -101,7 +102,7 @@ def sign_up_sucessfull():
 # ............................Plant App Started................................. 
  
 #load model
-model=load_model("Model/Various Plant Disease Detection Model1.h5")
+model=load_model(os.path.join("Model","Various Plant Disease Detection Model1.h5"))
 
 
 
@@ -175,15 +176,14 @@ def predict():
         file.save(file_path)
 
         pred, output_page = pred_plant_dieas(plant=file_path)
-                    
-        return render_template(output_page, pred_output = pred, user_image = 'user_upload'+'/'+filename)
-    return redirect('/')
+        return render_template(output_page, pred_output = pred, user_image = 'user_upload/'+filename)
+    return redirect('/') 
 # ............................Plant APP Ended........................................................
 
 # ...................................Health APP Started...............................................
 
 def pred_pnemoian(img_path):
-    model=load_model("Model/Chest XRay Pnemonia xception model.h5")
+    model=load_model(os.path.join("Model","Chest XRay Pnemonia xception model.h5"))
     img=load_img(img_path,target_size=(224,224))
     x=img_to_array(img)/225
     x=np.expand_dims(x, axis=0)
@@ -195,7 +195,7 @@ def pred_pnemoian(img_path):
         return "We found that you have Pnemonia disease please consult with the doctor"
 def pred_skin(img_path):
     
-    model=load_model("Model/skin cancer vgg16 model.h5")
+    model=load_model(os.path.join("Model","skin cancer vgg16 model.h5"))
     img=load_img(img_path,target_size=(224,224))
     x=img_to_array(img)/225
     x=np.expand_dims(x, axis=0)
@@ -222,7 +222,7 @@ def heart():
 @app.route('/heart_predict',methods=["GET","POST"])
 def heart_predict():
     if home_login_flag:
-        model = pickle.load(open('Model/Heart_disease_ab_0.90_model.sav', 'rb'))
+        model = pickle.load(open(os.path.join('Model','Heart_disease_ab_0.90_model.sav'), 'rb'))
         if request.method == 'POST':
             age=request.form['age']
             
@@ -269,7 +269,7 @@ def breast():
 @app.route("/breast_predict", methods=['GET', 'POST'])
 def breast_predict():
     if home_login_flag:
-        model = pickle.load(open('Model/brest_cancer_rf_model.sav', 'rb'))
+        model = pickle.load(open(os.path.join('Model','brest_cancer_rf_model.sav'), 'rb'))
         if request.method == 'POST':
             try:
                 mean_radius=float(request.form['mean_radius'])
@@ -320,7 +320,7 @@ def diabtes():
 @app.route("/diabtes_predict", methods=['GET', 'POST'])
 def diabtes_predict():
     if home_login_flag:
-        model = pickle.load(open('Model/diabetes_xg_0.76_model.sav', 'rb'))
+        model = pickle.load(open(os.path.join('Model','diabetes_xg_0.76_model.sav'), 'rb'))
         if request.method == 'POST':
             try:
                 Pregnancies=float(request.form['Pregnancies'])
@@ -372,7 +372,7 @@ def kidney():
 @app.route("/kidney_predict", methods=['GET', 'POST'])
 def kidney_predict():
     if home_login_flag:
-        model = pickle.load(open('Model/kidney_disease_ab1_model.sav', 'rb'))
+        model = pickle.load(open(os.path.join('Model','kidney_disease_ab1_model.sav'), 'rb'))
         if request.method=='POST':
             try:
                 age=float(request.form['age'])
