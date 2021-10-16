@@ -18,6 +18,7 @@ class mongo_db_atlas_ops:
             email_validation_flag= True
         else:
             email_validation_flag= False
+        password_validation_flag=False
         if email_validation_flag:
             if password_validation.count()>0:
                 for item in password_validation:
@@ -30,6 +31,7 @@ class mongo_db_atlas_ops:
                         
         else:
             password_validation_flag= False
+        
         return email_validation_flag, password_validation_flag
     def insert_signup_credentials(self,fname,lname,email,password,city,state,zip):
         client=self.get_mongo_db_connection()
