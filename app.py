@@ -54,8 +54,8 @@ def send_code():
             number=read_code()
             mail_obj.send_code(number,email)
             return render_template("code_validation.html")
-        return "<h1>Your Email is not registered with us please Sign-Up with Us!</h1>"
-    return redirect('/send_code')
+        return "<h1>Your Email is not registered with us please Sign-Up with Us! Refresh this page</h1>"
+    return redirect('/forget_password')
 @app.route('/validate_code',methods=['GET','POST'])
 def validate_code():
     if request.method == 'POST':
@@ -63,8 +63,8 @@ def validate_code():
         number=read_code()
         if str(code) == str(number):
             return render_template('new_password.html')
-        return "<h1>Code is not correct Please try again!</h1>"
-    return redirect('/validate_code')
+        return "<h1>Code is not correct Please try again! Please refresh the page</h1>"
+    return redirect('/forget_password')
 @app.route('/generate_new_password',methods=['GET','POST'])
 def generate_new_password():
     if request.method == 'POST':
@@ -72,8 +72,8 @@ def generate_new_password():
         mongo_obj=mongo_db_atlas_ops()
         email_=email_retrival.pop()
         mongo_obj.update_password(email_,new_password)
-        return "<h1>Password Generated Sucessfully now you can log-in</h1>"
-    return redirect('/generate_new_password')
+        return "<h1>Password Generated Sucessfully now you can log-in. Please refresh the page</h1>"
+    return redirect('/forget_password')
 @app.route('/signup',methods=['GET','POST'])
 def signup():
     return render_template('signup.html')
