@@ -2,7 +2,6 @@ from flask import Flask, render_template, request, redirect
 from src.login_validation import credentials_validations
 from src.utils.emails import mail
 from src.signup_credentials import credentials_handling
-import random
 from src.mongo_db_ops.db_operations import mongo_db_atlas_ops
 import numpy as np
 import os
