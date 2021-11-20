@@ -6,12 +6,12 @@ import random
 from src.mongo_db_ops.db_operations import mongo_db_atlas_ops
 import numpy as np
 import os
-from tensorflow.keras.preprocessing.image import img_to_array,load_img
-from tensorflow.keras.models import load_model
 import pickle
 import pandas as pd
 from werkzeug.utils import secure_filename
 from src.app_utils.generate_random_code_for_validation import generate_code, read_code
+from src.app_utils.predict_images import pred_plant_dieas,pred_pnemoian,pred_skin
+from src.app_utils.kidney_disease_prediction import kidney_disease_pred
 os.environ['TF_FORCE_GPU_ALLOW_GROWTH'] = 'true'
 app = Flask(__name__)
 @app.route('/',methods=['GET','POST'])
@@ -41,7 +41,6 @@ def home():
 def forget_password():
     return render_template("Password_Forget.html")
 email_retrival=[]
-# number=random.randint(10000,200000)
 @app.route('/send_code',methods=['POST','GET'])
 def send_code():
     if request.method == 'POST':
@@ -91,8 +90,6 @@ def submit_sign_up_form():
         city=request.form['city']
         state=request.form['state']
         zip=request.form['zip']
-        # mail_obj=mail()
-        # mail_obj.send_code(number,email)
         credentials_obj=credentials_handling.sign_up_credentials()
         dump_data=credentials_obj.dump_credentials_to_mongo_atlas(fname,lname,email,password,city,state,zip)
         if dump_data is None:
@@ -103,73 +100,12 @@ def submit_sign_up_form():
 @app.route('/sign_up_sucessfull',methods=['GET','POST'])
 def sign_up_sucessfull():
     return redirect('/')
-# ............................Plant App Started................................. 
- 
-#load model
-model=load_model(os.path.join("Model","Various Plant Disease Detection Model1.h5"))
-
-
-
-def pred_plant_dieas(plant):
-  test_image = load_img(plant, target_size = (150, 150)) # load image 
-  test_image = img_to_array(test_image)/255 
-  test_image = np.expand_dims(test_image, axis = 0) # change dimention 3D to 4D
-   
-  result = model.predict(test_image).round(3) 
-   
-  pred = np.argmax(result) 
- 
-  if pred == 0:
-    return "Pepper bell Bacterial_spot", 'Pepper__bell___Bacterial_spot.html' 
-  elif pred == 1:
-      return 'Pepper bell healthy', 'Pepper__bell___healthy.html' 
-  elif pred == 2:
-      return 'Potato Early blight', 'Potato___Early_blight.html'  
-  elif pred == 3:
-      return 'Potato Late blight', 'Potato___Late_blight.html'  
-  elif pred==4:
-    return "Potato healthy", 'Potato___healthy.html' 
-  elif pred==5:
-    return "Tomato Bacterial spot", 'Tomato_Bacterial_spot.html' 
-  elif pred==6:
-    return "Tomato Early blight", 'Tomato_Early_blight.html' 
-  elif pred==7:
-    return "Tomato Late blight", 'Tomato_Late_blight.html' 
-  elif pred==8:
-    return "Tomato Leaf Mold", 'Tomato_Leaf_Mold.html' 
-  elif pred==9:
-    return "Tomato Septoria leaf spot", 'Tomato_Septoria_leaf_spot.html' 
-  elif pred==10:
-    return "Tomato Spider mites Two spotted spider mite", 'Tomato_Spider_mites_Two_spotted_spider_mite.html' 
-  elif pred==11:
-    return "Tomato Target Spot", 'Tomato__Target_Spot.html' 
-  elif pred==12:
-    return "Tomato Yellow Leaf Curl Virus", 'Tomato__Tomato_YellowLeaf__Curl_Virus.html' 
-  elif pred==13:
-    return "Tomato_mosaic_virus", 'Tomato__Tomato_mosaic_virus.html' 
-  elif pred==14:
-    return "Tomato healthy", 'Tomato_healthy.html' 
-  elif pred==15:
-    return "Diseased cotton leaf", 'diseased_cotton_leaf.html' 
-  elif pred==16:
-    return "Diseased cotton plant", 'diseased_cotton_plant.html' 
-  elif pred==17:
-    return "Fresh cotton leaf", 'fresh_cotton_leaf.html' 
-  elif pred==18:
-    return "Fresh cotton plant", 'fresh_cotton_plant.html' 
-  else:
-    return "An unknown error has been occured", 'error.html'
-
-     
- 
-# render index.html page
+# ............................Plant App Started.................................  
 @app.route("/Plant_disease_index", methods=[ 'POST','GET'])
 def Plant_disease_index():
     if home_login_flag[0]:
         return render_template("Plant_disease_index.html")
     return redirect('/')
-     
-  
 # get input image from client then predict class and render respective .html page for solution
 @app.route("/predict", methods = ['GET','POST'])
 def predict():
@@ -185,31 +121,6 @@ def predict():
 # ............................Plant APP Ended........................................................
 
 # ...................................Health APP Started...............................................
-
-def pred_pnemoian(img_path):
-    model=load_model(os.path.join("Model","Chest XRay Pnemonia xception model.h5"))
-    img=load_img(img_path,target_size=(224,224))
-    x=img_to_array(img)/225
-    x=np.expand_dims(x, axis=0)
-    pred=model.predict(x)
-    output=np.argmax(pred,axis=1)
-    if output==0:
-        return "Prediction Result: Don't worry You don't have any disease!"
-    elif output==1:
-        return "We found that you have Pnemonia disease please consult with the doctor"
-def pred_skin(img_path):
-    
-    model=load_model(os.path.join("Model","skin cancer vgg16 model.h5"))
-    img=load_img(img_path,target_size=(224,224))
-    x=img_to_array(img)/225
-    x=np.expand_dims(x, axis=0)
-    pred=model.predict(x)
-    output=np.argmax(pred,axis=1)
-    if output==0:
-        return "Prediction Result: Don't worry You don't have any disease!"
-    elif output==1:
-        return "We found that you have skin cancer, please consult with the doctor"
-
 
 # render index.html page
 @app.route("/health_index", methods=['GET', 'POST'])
@@ -257,10 +168,6 @@ def heart_predict():
                 return render_template('heart.html',prediction_text="Prediction Result: Don't worry You don't have any disease!")
             elif output==1:
                 return render_template('heart.html',prediction_text="We found something wrong with you please consult with the doctor")
-
-
-
-
         else:
             return render_template('heart.html')
     return redirect('/')
@@ -376,7 +283,6 @@ def kidney():
 @app.route("/kidney_predict", methods=['GET', 'POST'])
 def kidney_predict():
     if home_login_flag:
-        model = pickle.load(open(os.path.join('Model','kidney_disease_ab1_model.sav'), 'rb'))
         if request.method=='POST':
             try:
                 age=float(request.form['age'])
@@ -395,73 +301,7 @@ def kidney_predict():
                 rc=float(request.form['rc'])
             except Exception as e:
                 return render_template('kidney.html',prediction_text="Some unknown error occured please input the values in number or contact the develpor if it still occurs")
-            pc_=request.form['pc']
-            if pc_=='normal':
-                pc_normal=1
-                pc_nan=0
-            elif pc_=='nan':
-                pc_normal=0
-                pc_nan=1
-            else:
-                pc_normal=0
-                pc_nan=0
-            pcc_=request.form['pcc']
-            if pcc_=='present':
-                pcc_present=1
-            else:
-                pcc_present=0
-            ba_=request.form['ba']
-            if ba_=='present':
-                ba_present=1
-            else:
-                ba_present=0    
-            htn_=request.form['htn']
-            if htn_=='yes':
-                htn_yes=1
-            else:
-                htn_yes=0
-            dm_=request.form['dm']
-            if dm_=='yes':
-                dm_no=0
-                dm_yes=1
-            else:
-                dm_no=0
-                dm_yes=0
-
-            cad_=request.form['cad']
-            if cad_=='yes':
-                cad_yes=1
-            else:
-                cad_yes=0
-            appet_=request.form['appet']
-            if appet_=='poor':
-                appet_poor=1
-            else:
-                appet_poor=0
-            pe_=request.form['pe']
-            if pe_=='yes':
-                pe_yes=1
-            else:
-                pe_yes=0
-            ane_=request.form['ane']
-            if ane_=='yes':
-                ane_yes=1
-            else:
-                ane_yes=0
-            rbc_=request.form['rbc']
-            if rbc_=='normal':
-                rbc_normal=1
-                rbc_nan=0
-            elif rbc_=='nan':
-                rbc_normal=0
-                rbc_nan=1
-            else:
-                rbc_normal=0
-                rbc_nan=0
-            X=pd.DataFrame([[age, bp, sg, al, su, bgr, bu, sc, sod, pot, hemo,pcv, wc, rc, rbc_normal, rbc_nan, pc_normal, pc_nan,pcc_present, ba_present, htn_yes, dm_no, dm_yes, cad_yes,appet_poor, pe_yes, ane_yes]],columns=['age', 'bp', 'sg', 'al', 'su', 'bgr', 'bu', 'sc', 'sod', 'pot', 'hemo','pcv', 'wc', 'rc', 'rbc_normal', 'rbc_nan', 'pc_normal', 'pc_nan','pcc_present', 'ba_present', 'htn_yes', 'dm_no', 'dm_yes', 'cad_yes','appet_poor', 'pe_yes', 'ane_yes'])
-
-            X_col=X.columns[[ True,  True, False,  True, False,  True,  True,  True,  True,True,  True,  True,True,  True,  True,  True,  True, False,False, False,  True, False,  True,  True, False, False,True]]
-            output=model.predict(X[X_col])
+            output=kidney_disease_pred(age, bp, sg, al, su, bgr, bu, sc, sod, pot, hemo,pcv, wc, rc)
             if output==0:
                 return render_template('kidney.html',prediction_text="Result: \nPrediction Result: Don't worry You don't have any Kidney disease!")
             elif output==1:
