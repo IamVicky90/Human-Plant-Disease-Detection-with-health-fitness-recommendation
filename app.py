@@ -11,6 +11,7 @@ from tensorflow.keras.models import load_model
 import pickle
 import pandas as pd
 from werkzeug.utils import secure_filename
+from src.app_utils.generate_random_code_for_validation import generate_code, read_code
 os.environ['TF_FORCE_GPU_ALLOW_GROWTH'] = 'true'
 app = Flask(__name__)
 @app.route('/',methods=['GET','POST'])
@@ -40,7 +41,7 @@ def home():
 def forget_password():
     return render_template("Password_Forget.html")
 email_retrival=[]
-number=random.randint(10000,200000)
+# number=random.randint(10000,200000)
 @app.route('/send_code',methods=['POST','GET'])
 def send_code():
     if request.method == 'POST':
@@ -50,6 +51,8 @@ def send_code():
         email_retrival.append(email)
         if email_validation_flag:
             mail_obj=mail()
+            generate_code()
+            number=read_code()
             mail_obj.send_code(number,email)
             return render_template("code_validation.html")
         return "<h1>Your Email is not registered with us please Sign-Up with Us!</h1>"
@@ -58,6 +61,7 @@ def send_code():
 def validate_code():
     if request.method == 'POST':
         code=request.form['code']
+        number=read_code()
         if str(code) == str(number):
             return render_template('new_password.html')
         return "<h1>Code is not correct Please try again!</h1>"

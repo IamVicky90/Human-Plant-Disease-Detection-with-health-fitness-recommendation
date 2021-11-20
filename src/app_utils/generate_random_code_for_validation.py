@@ -1,8 +1,8 @@
 import random
 import os
 file_path=os.path.join(os.getcwd(),'code.txt')
-number=str(random.randint(100000,200000))
 def generate_code():
+    number=str(random.randint(100000,200000))
     with open(file_path,'w') as f:
         f.write(number)
 def read_code():
