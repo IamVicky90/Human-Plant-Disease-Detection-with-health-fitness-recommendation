@@ -2,7 +2,7 @@ import os
 from src.utils.common_utils import create_directory
 from datetime import datetime
 class add_logger:
-    def __init__(self):
+    def __init__(self) -> None:
         pass
     def log(self,message,filename,level_number=1):
         '''
@@ -25,4 +25,4 @@ class add_logger:
         date=d.strftime('%d-%m-%y %H:%M:%S')
         with open(os.path.join(os.getcwd(),'Project_Logs',filename),'a') as f:
             f.write(f"{str(date)}\t{level}\t{str(message)}\n")
-            # f.close()
+            f.close()

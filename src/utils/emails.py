@@ -44,6 +44,7 @@ class mail:
             server.sendmail(SENDER, RECIPIENT, message)
             # server.sendmail(SENDER, RECIPIENT, msg.as_string())
             server.close()
+            self.log=add_logger()
             self.log.log(f'Sucessfully send the mail to {str(RECIPIENT)}','emails.log',1)
         # Display an error message if something goes wrong.
         except Exception as e:
@@ -70,6 +71,7 @@ class mail:
 
     Dear User:\n\t\tYou have successfully Sign Up to Human and Plant Disease Detection with Health and Physical fitness recommendation App dated: {dt.strftime('%Y-%m-%d')}, time: {str(dt.timetz()).split('.')[0]} hours. Please Log-in to your account.\n\nRegards: Vicky AI Production"""
         self.send_mail(email=email,message=message)
+        self.log=add_logger()
         self.log.log(f'Sign-Up Sucessfully mail send to email: {str(email)}','emails.log',1)
     def failed_login_mail(self,email,email_validation_flag):
         '''Take the email address to send mail
@@ -87,6 +89,7 @@ class mail:
 
         Dear User:\n\t\tYour Email or Password is invalid to log on to Human and Plant Disease Detection with Health and Physical fitness recommendation App dated: {dt.strftime('%Y-%m-%d')}, time: {str(dt.timetz()).split('.')[0]} hours. Please try again to Log-in on your account Or if you are a new user then try to Sign Up.\n\nRegards: Vicky AI Production"""
         self.send_mail(email=email,message=message)
+        self.log=add_logger()
         self.log.log(f'Failed to Log-In Sucessfully mail send to email: {str(email)}','emails.log',2)
     def send_code(self,code,email):
         '''Send code to the user for email verification
@@ -98,6 +101,7 @@ class mail:
 
     Dear User:\n\t\tYour code of verification is {code} to Human and Plant Disease Detection with Health and Physical fitness recommendation App dated: {dt.strftime('%Y-%m-%d')}, time: {str(dt.timetz()).split('.')[0]} hours. If you don't requested this then simply ignore it or contact us at vickyaiproduction@gmail.com'\n\nRegards: Vicky AI Production"""
         self.send_mail(email=email,message=message)
+        self.log=add_logger()
         self.log.log(f'Email verification code send to email: {str(email)}','emails.log',2)
             
             

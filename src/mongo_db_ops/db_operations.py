@@ -38,7 +38,7 @@ class mongo_db_atlas_ops:
                             
             else:
                 password_validation_flag= False
-            
+            self.log=add_logger()
             self.log.log(f'Email: {str(email)} validation flag, email_validation_flag: {str(email_validation_flag)},password_validation_flag: {str(password_validation_flag)}','db_operations.log',1)
             return email_validation_flag, password_validation_flag
         except Exception as e:
@@ -51,6 +51,7 @@ class mongo_db_atlas_ops:
             table=login_credentials['login_credentials']
             result = hashlib.sha256(password.encode())
             table.insert_one({'fname':str(fname),'lname':str(lname),'email':str(email),'password':str(result.hexdigest()),'city':str(city),'state':str(state),'zip':str(zip)})
+            self.log=add_logger()
             self.log.log(f'sign_up credentials for email: {str(email)} sucessfully inserted into database','db_operations.log',1)
         except Exception as e:
             self.log.log(f'sign_up credentials for email: {str(email)} couldnot inserted into database error, {str(e)}','db_operations.log',3)
@@ -60,6 +61,7 @@ class mongo_db_atlas_ops:
             login_credentials=client['Human_and_Plant_Health_SDM']
             table=login_credentials['login_credentials']
             email_validation=login_credentials['login_credentials'].find({'email':str(email)})
+            self.log=add_logger()
             self.log.log(f'sign_up credentials sucessfully inserted into database','db_operations.log',1)
             for password_ in email_validation:
                 old_password=password_['password']

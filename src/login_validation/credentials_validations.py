@@ -20,6 +20,7 @@ class user_validation:
         '''
         try:
             result = hashlib.sha256(password.encode())
+            self.log=add_logger()
             self.log.log(f'email: {self.email} password encripted sucessfully','credentials_validation.log',1)
             return str(result.hexdigest())
         except Exception as e:
