@@ -20,7 +20,6 @@ class add_logger:
         if level_number==1: level='INFO'
         if level_number==2: level='WARNING'
         if level_number==3: level='ERROR'
-        create_directory(['Project_Logs'])
         d=datetime.now()
         date=d.strftime('%d-%m-%y %H:%M:%S')
         with open(os.path.join(os.getcwd(),'Project_Logs',filename),'a') as f:

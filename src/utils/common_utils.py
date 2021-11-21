@@ -1,12 +1,12 @@
 import os
-from src.loggings import add_logger
+from src import loggings
 def create_directory(dirnames:list,exist_ok=True):
     '''
     args:
         dirnames: expected directory names with path in list
         exist_ok: will not raise except if directory already exists by default True
     '''
-    log=add_logger()
+    log=loggings.add_logger()
     for dir in dirnames:
         try:
             os.makedirs(dir,exist_ok=exist_ok)

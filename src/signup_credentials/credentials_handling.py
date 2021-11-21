@@ -10,7 +10,7 @@ class sign_up_credentials:
             client=self.mongo_conn.get_mongo_db_connection()
             login_credentials=client['Human_and_Plant_Health_SDM']
             email_validation_flag, password_validation_flag=self.mongo_conn.find_in_database(login_credentials,str(email),str(password))
-            log.log(f'credentials_validations funtion run sucessfully and the email_validation_flag: {email_validation_flag} and password_validation_flag: {password_validation_flag} for email {str(email)}','credentials_handling.log',1)
+            log.log(f'credentials_validations funtion run sucessfully and the email_validation_flag for signUp is : {email_validation_flag} for email {str(email)}','credentials_handling.log',1)
             return email_validation_flag, password_validation_flag
         except Exception as e:
             log.log(f'credentials_validations could not run sucessfully for email {str(email)}, error, {str(e)}','credentials_handling.log',3)

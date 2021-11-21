@@ -1,3 +1,4 @@
+from re import I
 from flask import Flask, render_template, request, redirect
 from src.login_validation import credentials_validations
 from src.utils.emails import mail
@@ -11,10 +12,12 @@ from werkzeug.utils import secure_filename
 from src.app_utils.generate_random_code_for_validation import generate_code, read_code
 from src.app_utils.predict_images import pred_plant_dieas,pred_pnemoian,pred_skin
 from src.app_utils.kidney_disease_prediction import kidney_disease_pred
+from src.utils.common_utils import create_directory
 os.environ['TF_FORCE_GPU_ALLOW_GROWTH'] = 'true'
 app = Flask(__name__)
 @app.route('/',methods=['GET','POST'])
 def login():
+    create_directory(['Project_Logs'])
     return render_template('login.html')
 @app.route('/failed_login',methods=['GET','POST'])
 def failed_login():
@@ -34,6 +37,8 @@ def home():
             return render_template('home.html')
         mail_obj.failed_login_mail(email,email_validation_flag)
         return redirect('/failed_login')
+    elif home_login_flag[0]:
+        return render_template('home.html')
     else:
         return redirect('/')
 @app.route('/forget_password',methods=['GET','POST'])
