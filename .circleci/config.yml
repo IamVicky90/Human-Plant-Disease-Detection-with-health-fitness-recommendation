@@ -1,11 +1,13 @@
 version: 2.1
-# orbs:
-#   health: circleci/health@1.0.1
+# jobs:
+#   test:
+#     docker:
+#       - image: cimg/node:<node-version>
 jobs:
   build-and-test:
     # executor: health/default
     docker:
-      - image: circleci/python:3.8.5-stretch-browsers
+      - image: ubuntu-2004:202010-01
         auth:
           username: iamvicky90
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -43,32 +45,9 @@ jobs:
             docker build -t $DOCKERHUB_USER/$IMAGE_NAME:$TAG .
             docker login -u $DOCKERHUB_USER -p $DOCKER_HUB_PASSWORD_USER docker.io
             docker push $DOCKERHUB_USER/$IMAGE_NAME:$TAG
-  # deploy:
-  #   executor: health/default
-  #   steps:
-  #     - checkout
-  #     - run:
-  #         name: Storing previous commit
-  #         command: |
-  #           git rev-parse HEAD > ./commit.txt
-  #     - heroku/install
-  #     - setup_remote_docker:
-  #         version: 18.06.0-ce
-  #     - run:
-  #         name: Pushing to heroku registry
-  #         command: |
-  #           heroku container:login
-  #           #heroku ps:scale web=1 -a $HEROKU_APP_NAME
-  #           heroku container:push web -a $HEROKU_APP_NAME
-  #           heroku container:release web -a $HEROKU_APP_NAME
+
 workflows:
   build-test-deploy:
     jobs:
       - build-and-test
-      - deploy:
-          requires:
-            - build-and-test
-          filters:
-            branches:
-              only:
-                - main
+      
