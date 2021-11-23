@@ -1,8 +1,5 @@
 version: 2.1
-# jobs:
-#   test:
-#     docker:
-#       - image: cimg/node:<node-version>
+
 jobs:
   build-and-test:
     # executor: health/default
