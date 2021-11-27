@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     environment:
-      IMAGE_NAME: IamVicky90/Human-and-Plant-Disease-Detection-with-Health-And-Fitness-Recommendation
+      IMAGE_NAME: iamvicky90/human-and-plant-disease-detection-with-health-and-fitness-recommendation
     docker:
       - image: circleci/buildpack-deps:stretch
     steps:
