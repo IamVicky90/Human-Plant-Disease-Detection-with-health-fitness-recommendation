@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     environment:
-      IMAGE_NAME: iamvicky90/human-and-plant-disease-detection-with-health-and-fitness-recommendation
+      IMAGE_NAME: human-and-plant-disease-detection-with-health-and-fitness-recommendation
     docker:
       - image: circleci/python:3.6.2-stretch-browsers
         auth:
