@@ -5,6 +5,9 @@ jobs:
       IMAGE_NAME: iamvicky90/human-and-plant-disease-detection-with-health-and-fitness-recommendation
     docker:
       - image: circleci/python:3.8.5-stretch-browsers
+        auth:
+          username: $DOCKERHUB_USER
+          password: $DOCKERHUB_PASSWORD 
     steps:
       - checkout
       - setup_remote_docker
