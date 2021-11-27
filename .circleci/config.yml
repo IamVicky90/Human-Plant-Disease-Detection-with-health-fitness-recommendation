@@ -26,7 +26,7 @@ jobs:
           command: |
             echo "$DOCKERHUB_PASSWORD" | docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD docker.io
             
-            docker push $IMAGE_NAME
+            docker push $DOCKERHUB_USER/$IMAGE_NAME
 workflows:
   version: 2
   build-master:
