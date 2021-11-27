@@ -2,9 +2,12 @@ version: 2
 jobs:
   build:
     environment:
-      IMAGE_NAME: IamVicky90/Human-and-Plant-Disease-Detection-with-Health-And-Fitness-Recommendation
+      IMAGE_NAME: human-and-plant-disease-detection-with-health-and-fitness-recommendation
     docker:
-      - image: ubuntu-2004:202010-01
+      - image: circleci/python:3.6.2-stretch-browsers
+        auth:
+          username: $DOCKERHUB_USER
+          password: $DOCKERHUB_PASSWORD 
     steps:
       - checkout
       - setup_remote_docker
@@ -13,9 +16,9 @@ jobs:
           command: docker build -t $IMAGE_NAME:latest .
   publish-latest:
     environment:
-      IMAGE_NAME: building-on-ci
+      IMAGE_NAME: building-on-circleci
     docker:
-      - image: ubuntu-2004:202010-01
+      - image: circleci/python:3.6.2-stretch-browsers
     steps:
       - setup_remote_docker
       - run:
@@ -30,13 +33,14 @@ workflows:
       - build:
           filters:
             branches:
-              only: master
+              only: main
       - publish-latest:
           requires:
             - build
           filters:
             branches:
               only: main
+              
 # version: 2.1
 
 # jobs:
