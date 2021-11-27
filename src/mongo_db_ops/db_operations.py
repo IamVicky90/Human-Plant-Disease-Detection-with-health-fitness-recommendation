@@ -19,13 +19,12 @@ class mongo_db_atlas_ops:
         try:
             email_validation=table_name['login_credentials'].find({'email':str(email)})
             password_validation=table_name['login_credentials'].find({'password':password})
+            email_validation_flag= False
+            password_validation_flag= False
             if email_validation.count()>0:
                 for item in email_validation:
                     email_id=item.get('_id')
                 email_validation_flag= True
-            else:
-                email_validation_flag= False
-            password_validation_flag=False
             if email_validation_flag:
                 if password_validation.count()>0:
                     for item in password_validation:
@@ -33,11 +32,6 @@ class mongo_db_atlas_ops:
                         if email_id==pass_id:
                             password_validation_flag= True
                             break
-                        else:
-                            password_validation_flag= False
-                            
-            else:
-                password_validation_flag= False
             self.log=add_logger()
             self.log.log(f'Email: {str(email)} validation flag, email_validation_flag: {str(email_validation_flag)},password_validation_flag: {str(password_validation_flag)}','db_operations.log',1)
             return email_validation_flag, password_validation_flag
