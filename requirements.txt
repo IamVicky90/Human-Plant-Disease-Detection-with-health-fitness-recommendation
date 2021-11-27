@@ -42,7 +42,7 @@ PyYAML
 requests
 requests-oauthlib
 rsa
-scikit-learn==1.0
+scikit-learn
 scipy
 shellescape
 six
