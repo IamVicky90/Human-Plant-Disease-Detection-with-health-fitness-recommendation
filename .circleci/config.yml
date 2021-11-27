@@ -3,7 +3,7 @@ jobs:
   build:
     environment:
       IMAGE_NAME: human-and-plant-disease-detection-with-health-and-fitness-recommendation
-      TAG: 0.1.$CIRCLE_BUILD_NUM
+      # TAG: 0.1.$CIRCLE_BUILD_NUM
     docker:
       - image: circleci/python:3.6.2-stretch-browsers
         auth:
@@ -11,19 +11,28 @@ jobs:
           password: $DOCKERHUB_PASSWORD 
     steps:
       - checkout
-      - setup_remote_docker
+      - restore_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
       - run:
-          name: Build Docker image
-          command: docker build -t $DOCKERHUB_USER/$IMAGE_NAME:$TAG .
-            # echo 'export TAG=0.1.${CIRCLE_BUILD_NUM}' >> $BASH_ENV
-            # echo 'export IMAGE_NAME=${IMAGE_NAME}' >> $BASH_ENV 
-  publish-latest:
-    environment:
-      IMAGE_NAME: human-and-plant-disease-detection-with-health-and-fitness-recommendation
-      TAG: 0.1.$CIRCLE_BUILD_NUM
-    docker:
-      - image: circleci/python:3.6.2-stretch-browsers
-    steps:
+          name: Install Python deps in a venv
+          command: |
+            echo 'export TAG=0.1.${CIRCLE_BUILD_NUM}' >> $BASH_ENV
+            echo 'export IMAGE_NAME=${DOCKER_IMAGE_NAME}' >> $BASH_ENV
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install --upgrade pip
+            pip install -r requirements.txt
+      - save_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          paths:
+            - "venv"
+  # publish-latest:
+  #   # environment:
+  #   #   IMAGE_NAME: human-and-plant-disease-detection-with-health-and-fitness-recommendation
+  #     # TAG: 0.1.$CIRCLE_BUILD_NUM
+  #   docker:
+  #     - image: circleci/python:3.6.2-stretch-browsers
+  #   steps:
       - setup_remote_docker
       - run:
           name: Publish Docker Image to Docker Hub
@@ -39,12 +48,12 @@ workflows:
           filters:
             branches:
               only: main
-      - publish-latest:
-          requires:
-            - build
-          filters:
-            branches:
-              only: main
+      # - publish-latest:
+      #     requires:
+      #       - build
+          # filters:
+          #   branches:
+          #     only: main
               
 # version: 2.1
 
@@ -56,23 +65,23 @@ workflows:
 #         auth:
 #           username: iamvicky90
 #           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-#     steps:
-#       - checkout
-#       - restore_cache:
-#           key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
-#       - run:
-#           name: Install Python deps in a venv
-#           command: |
-#             echo 'export TAG=0.1.${CIRCLE_BUILD_NUM}' >> $BASH_ENV
-#             echo 'export IMAGE_NAME=${DOCKER_IMAGE_NAME}' >> $BASH_ENV
-#             python3 -m venv venv
-#             . venv/bin/activate
-#             pip install --upgrade pip
-#             pip install -r requirements.txt
-#       - save_cache:
-#           key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
-#           paths:
-#             - "venv"
+    # steps:
+    #   - checkout
+    #   - restore_cache:
+    #       key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+    #   - run:
+    #       name: Install Python deps in a venv
+    #       command: |
+    #         echo 'export TAG=0.1.${CIRCLE_BUILD_NUM}' >> $BASH_ENV
+    #         echo 'export IMAGE_NAME=${DOCKER_IMAGE_NAME}' >> $BASH_ENV
+    #         python3 -m venv venv
+    #         . venv/bin/activate
+    #         pip install --upgrade pip
+    #         pip install -r requirements.txt
+    #   - save_cache:
+    #       key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+    #       paths:
+    #         - "venv"
 #       - run:
 #           command: |
 #             . venv/bin/activate
