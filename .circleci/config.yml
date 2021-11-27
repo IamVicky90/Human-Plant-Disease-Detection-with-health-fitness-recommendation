@@ -4,7 +4,7 @@ jobs:
     environment:
       IMAGE_NAME: IamVicky90/Human-and-Plant-Disease-Detection-with-Health-And-Fitness-Recommendation
     docker:
-      - image: ubuntu
+      - image: circleci/buildpack-deps:stretch
     steps:
       - checkout
       - setup_remote_docker
@@ -13,9 +13,9 @@ jobs:
           command: docker build -t $IMAGE_NAME:latest .
   publish-latest:
     environment:
-      IMAGE_NAME: building-on-ubuntu
+      IMAGE_NAME: building-on-circleci
     docker:
-      - image: ubuntu
+      - image: circleci/buildpack-deps:stretch
     steps:
       - setup_remote_docker
       - run:
