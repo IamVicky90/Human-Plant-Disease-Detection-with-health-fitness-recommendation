@@ -15,7 +15,7 @@ jobs:
           name: Build Docker image
           command: |
             echo 'export TAG=0.1.${CIRCLE_BUILD_NUM}' >> $BASH_ENV
-            echo 'export IMAGE_NAME=${DOCKER_IMAGE_NAME}' >> $BASH_ENV 
+            echo 'export IMAGE_NAME=${IMAGE_NAME}' >> $BASH_ENV 
             docker build -t $DOCKERHUB_USER/$IMAGE_NAME:$TAG .
   publish-latest:
     environment:
