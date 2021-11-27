@@ -16,7 +16,7 @@ jobs:
           command: docker build -t $IMAGE_NAME:latest .
   publish-latest:
     environment:
-      IMAGE_NAME: building-on-circleci
+      IMAGE_NAME: human-and-plant-disease-detection-with-health-and-fitness-recommendation
     docker:
       - image: circleci/python:3.6.2-stretch-browsers
     steps:
