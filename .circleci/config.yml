@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     environment:
-      IMAGE_NAME: human-and-plant-disease-detection-with-health-and-fitness-recommendation
+      DOCKER_IMAGE_NAME: human-and-plant-disease-detection-with-health-and-fitness-recommendation
       # TAG: 0.1.$CIRCLE_BUILD_NUM
     docker:
       - image: circleci/python:3.6.2-stretch-browsers
