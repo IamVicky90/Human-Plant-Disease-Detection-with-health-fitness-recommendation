@@ -33,10 +33,16 @@ jobs:
   #   docker:
   #     - image: circleci/python:3.6.2-stretch-browsers
   #   steps:
+      # - run:
+      #     name: Build and push Docker image
+      #     command: |
+      #       docker login -u $DOCKERHUB_USER -p $DOCKER_HUB_PASSWORD_USER docker.io
+      #       docker push $DOCKERHUB_USER/$IMAGE_NAME:$TAG
       - setup_remote_docker
       - run:
-          name: Publish Docker Image to Docker Hub
+          name: Build and push Docker image
           command: |
+            docker build -t $DOCKERHUB_USER/$IMAGE_NAME:$TAG .
             echo "$DOCKERHUB_PASSWORD" | docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD docker.io
             
             docker push $DOCKERHUB_USER/$IMAGE_NAME:$TAG
@@ -93,12 +99,12 @@ workflows:
 #           path: test-reports/
 #       - setup_remote_docker:
 #           version: 19.03.13
-#       - run:
-#           name: Build and push Docker image
-#           command: |
-#             docker build -t $DOCKERHUB_USER/$IMAGE_NAME:$TAG .
-#             docker login -u $DOCKERHUB_USER -p $DOCKER_HUB_PASSWORD_USER docker.io
-#             docker push $DOCKERHUB_USER/$IMAGE_NAME:$TAG
+      # - run:
+      #     name: Build and push Docker image
+      #     command: |
+      #       docker build -t $DOCKERHUB_USER/$IMAGE_NAME:$TAG .
+      #       docker login -u $DOCKERHUB_USER -p $DOCKER_HUB_PASSWORD_USER docker.io
+      #       docker push $DOCKERHUB_USER/$IMAGE_NAME:$TAG
 
 # workflows:
 #   build-test-deploy:
