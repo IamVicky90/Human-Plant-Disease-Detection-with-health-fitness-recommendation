@@ -13,12 +13,15 @@ from src.app_utils.generate_random_code_for_validation import generate_code, rea
 from src.app_utils.predict_images import pred_plant_dieas,pred_pnemoian,pred_skin
 from src.app_utils.kidney_disease_prediction import kidney_disease_pred
 from src.utils.common_utils import create_directory
+from src.cassandra_db_ops.dump_data_into_cassandra import cassandra_ops
 from src.loggings import add_logger
 os.environ['TF_FORCE_GPU_ALLOW_GROWTH'] = 'true'
 log=add_logger()
 app = Flask(__name__)
 @app.route('/',methods=['GET','POST'])
 def login():
+    cassandra_obj=cassandra_ops()
+    cassandra_obj.dump_logging_files_into_cassandra_db()
     create_directory(['Project_Logs'])
     return render_template('login.html')
 @app.route('/failed_login',methods=['GET','POST'])
