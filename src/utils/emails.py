@@ -31,7 +31,7 @@ class mail:
         PASSWORD_SMTP = os.environ.get('PASSWORD_SMTP')
 
 
-        HOST = "email-smtp.us-east-1.amazonaws.com"
+        HOST = "email-smtp.us-east-2.amazonaws.com"
         PORT = 587
         
         try:  
