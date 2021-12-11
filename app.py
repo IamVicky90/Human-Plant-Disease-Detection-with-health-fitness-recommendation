@@ -16,6 +16,7 @@ from src.utils.common_utils import create_directory
 from src.cassandra_db_ops.dump_data_into_cassandra import cassandra_ops
 from src.loggings import add_logger
 os.environ['TF_FORCE_GPU_ALLOW_GROWTH'] = 'true'
+create_directory([os.path.join('static','user_upload')])
 log=add_logger()
 app = Flask(__name__)
 @app.route('/',methods=['GET','POST'])
