@@ -4,3 +4,4 @@ Plant-Diseas-Pro
 __pycache__/
 code.txt
 *.log
+static/user_upload
