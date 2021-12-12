@@ -14,11 +14,11 @@ jsonify==0.5
 keras==2.7.0
 Keras-Preprocessing==1.1.2
 numpy
-pandas==1.3.4
-Pillow==8.4.0
+pandas
+Pillow
 pymongo==3.12.0
-PyYAML==6.0
-requests==2.26.0
+PyYAML
+requests
 scikit-learn==1.0.1
 scipy==1.7.3
 sklearn==0.0
