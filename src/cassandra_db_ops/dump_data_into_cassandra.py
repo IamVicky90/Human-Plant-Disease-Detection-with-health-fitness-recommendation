@@ -54,4 +54,4 @@ class cassandra_ops:
                         log.log(f'Could occured remove the file {str(file)} from path {str(file_path)} error: {str(e)}','cassandra_db.log',3)        
             log.log(f'Sucessfully dump loggings file into cassandra database with keyspace %s'%keyspace,'cassandra_db.log',1)
         except Exception as e:
-            log.log(f'Error occured while dumping the loggings file into cassandra database with keyspace %s error: %s'%keyspace %str(e),'cassandra_db.log',3)
+            log.log(f'Error occured while dumping the loggings file into cassandra database with keyspace {keyspace} error: {str(e)}','cassandra_db.log',3)
