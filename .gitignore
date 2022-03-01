@@ -6,3 +6,4 @@ code.txt
 *.log
 static/user_upload
 src/medical_report_file/report.docx
+env_
