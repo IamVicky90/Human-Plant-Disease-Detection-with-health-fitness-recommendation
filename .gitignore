@@ -7,3 +7,4 @@ code.txt
 static/user_upload
 src/medical_report_file/report.docx
 env_
+*.zip
