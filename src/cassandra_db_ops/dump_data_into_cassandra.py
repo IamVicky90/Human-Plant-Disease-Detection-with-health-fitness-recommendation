@@ -2,7 +2,8 @@ from cassandra.cluster import Cluster
 from cassandra.auth import PlainTextAuthProvider
 import os
 from src.loggings import add_logger
-class cassandra_ops:
+from threading import Thread
+class cassandra_ops():
     def __init__(self):
         pass
     def connect_to_cassandra_db(self,keyspace):
@@ -27,10 +28,16 @@ class cassandra_ops:
             return session
         else:
             log.log(f'Error occured while creating and returning the session of cassandra database with keyspace %s' % keyspace,'cassandra_db.log',3)
-    def dump_logging_files_into_cassandra_db(self,keyspace='project_loggings'):
+    def dump_logging_files_into_cassandra_db(self):
+        dump_logging_files_into_cassandra_db().start()
+class dump_logging_files_into_cassandra_db(Thread):
+    def __init__(self):
+        Thread.__init__(self)
+    def run(self):
         log=add_logger()
+        keyspace='project_loggings'
         try:
-            session=self.connect_to_cassandra_db(keyspace=keyspace)
+            session=cassandra_ops().connect_to_cassandra_db(keyspace=keyspace)
             files=os.listdir('Project_Logs')
             for file in files:
                 if '.log' in file:
@@ -55,3 +62,4 @@ class cassandra_ops:
             log.log(f'Sucessfully dump loggings file into cassandra database with keyspace %s'%keyspace,'cassandra_db.log',1)
         except Exception as e:
             log.log(f'Error occured while dumping the loggings file into cassandra database with keyspace {keyspace} error: {str(e)}','cassandra_db.log',3)
+
