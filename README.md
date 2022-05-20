@@ -1,5 +1,5 @@
-# Health App based on 4 Machine Learning and 2 Deep Learnings at same place
-## 6 Different Health Predictions Models I trained
+# Health App based on 4 Machine Learning and 3 Deep Learnings at same place
+## 7 Different Human Health Predictions Models I trained
 ## Table of Contents.
   * [Demo](#demo)
   * [Overview](#overview)
@@ -27,7 +27,7 @@
 
   
   ## Overview
-I made this six medical prediction applications. For this I use 4 Machine Learning and 1 Deep Learning Models on Flask app trained on the top of Keras API. Just fill the information then it will predict you whether you have some disease or not, provided the data that you have given to it.
+I made this seven medical prediction applications. For this I use 4 Machine Learning and 3 Deep Learning Models on Flask app trained on the top of Keras API. Just fill the information then it will predict you whether you have some disease or not, provided the data that you have given to it.
 ## Motivation
 What could be a perfect way to utilize unfortunate lockdown period? Like most of you, I spend my time in cooking, Netflix, coding and reading some latest research papers on weekends. This idea came into my mind when I exploring the Kaggle datasets in medical fields. The people now a days paying high fees and give a lot of time to the disease specialists and in testing. So I utilize my best knowledge to overcome their expenses and time. 
 
