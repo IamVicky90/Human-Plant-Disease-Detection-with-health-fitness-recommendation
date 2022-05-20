@@ -7,7 +7,7 @@
   * [Technical Aspect](#technical-aspect)
   * [Installation](#installation)
   * [Run](#run)
-  * [Directory Tree](#directory-tree)
+  * [Email Service](#email-service)
   * [Libraries](#libraries)
   
   ## Demo
@@ -58,74 +58,8 @@ __Follow the following steps to run in dockers as I given a wafer_fault_detectio
 >> docker pull iamvicky90/human-and-plant-disease-detection-with-health-and-fitness-recommendation:0.1.57
 >> sudo docker run -it --name [docker_container_name] -d -p 5000:5000 MONGO_USER=[MONGODB_USER_NAME] -e MONGO_PASSWORD=[MONGODB_PASSWORD] -e USERNAME_SMTP=[AWS SES USERNAME API KEY] -e PASSWORD_SMTP=[AWS SES PASSWORD API KEY] [image_id]
 ```
-## Directory Tree 
-```
-├── .vscode
-│   ├── settings.json
-├── Model
-│   ├── Chest XRay Pnemonia xception model.h5
-│   ├── Heart_disease_ab_0.90_model.sav
-│   ├── brest_cancer_rf_model.sav
-│   ├── diabetes_xg_0.76_model.sav
-│   ├── kidney_disease_ab1_model.sav
-│   └── skin cancer vgg16 model.h5
-├── chest_xray
-│   ├── Test
-    │   ├── NORMAL.
-    │   ├── PNEUMONIA
-│   ├── Train
-    │   ├── NORMAL.
-    │   ├── PNEUMONIA
-│   ├── Val
-    │   ├── NORMAL.
-    │   ├── PNEUMONIA
-├── git images
-│   ├── 2.PNG
-│   ├── capture.PNG
-
-├── .ipynb notebooks
-│   ├── Breast Cancer.ipynb
-│   ├── Chest XRay Pnemonia.ipynb
-│   ├── Heart Disease.ipynb
-│   ├── Kidney Disease.ipynb
-│   ├── Real_skin_cancer.ipynb
-│   └── diabetes.ipynb
-
-├── skin cancer dl
-│   ├── Test
-    │   ├── benign
-    │   ├── malignant
-│   ├── Train
-    │   ├── benign
-    │   ├── malignant
-
-├── static
-│   ├── css
-│   ├── Images
-│   ├── js
-
-├── templates
-│   ├── base.html
-│   ├── breast.html
-│   ├── diabtes.html
-│   ├── heart.html
-│   ├── index.html
-│   ├── kidney.html
-│   ├── pnemonia.html
-│   ├── skin.html
-│   ├── skin_base.html
-
-
-├── Breast_cancer_data.csv
-├── app.py
-├── cancer desc.txt
-├── diabetes.csv
-├── heart.csv
-├── kidney disease desc.txt
-├── kidney_disease.csv 
-├── README.md
-├── requirements.txt
-```
+## Email Service
+Here you will get a confirmation mail when sign-up/sign-in.
 ## Libraries
 also mentioned in [requirements.txt](https://github.com/IamVicky90/Health-App/blob/main/requirements.txt)
 ```
