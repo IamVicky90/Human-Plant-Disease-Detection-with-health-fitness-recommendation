@@ -96,6 +96,7 @@ class send_mail_with_threading(Thread):
 
         HOST = "email-smtp.us-east-2.amazonaws.com"
         PORT = 587
+        self.log=add_logger()
         try:
             server = smtplib.SMTP('smtp.gmail.com: 587')
             server.ehlo()
