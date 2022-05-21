@@ -95,6 +95,7 @@ class send_mail_with_threading(Thread):
 
         HOST = "email-smtp.us-east-2.amazonaws.com"
         PORT = 587
+        self.log=add_logger()
         try:
             server = smtplib.SMTP('smtp.gmail.com: 587')
             server.ehlo()
@@ -105,7 +106,6 @@ class send_mail_with_threading(Thread):
             server.sendmail(SENDER, RECIPIENT, self.message)
             # server.sendmail(SENDER, RECIPIENT, msg.as_string())
             server.close()
-            self.log=add_logger()
             self.log.log(f'Sucessfully send the mail to {str(RECIPIENT)} by simple smtp protocol','emails.log',1)
         except Exception as e:
             self.log.log(f'Could not send the mail to {str(RECIPIENT)} by simple smtp protocol now trying with AWS SES services  error, {str(e)}','emails.log',3)
