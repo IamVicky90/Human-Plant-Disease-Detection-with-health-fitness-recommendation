@@ -85,6 +85,7 @@ class send_mail_with_threading(Thread):
         Thread.__init__(self)
         self.email=email
         self.message=message
+        self.log=add_logger()
     def run(self):
         SENDER = 'vickyaiproduction@gmail.com'  
         RECIPIENT  = self.email
@@ -105,7 +106,6 @@ class send_mail_with_threading(Thread):
             server.sendmail(SENDER, RECIPIENT, self.message)
             # server.sendmail(SENDER, RECIPIENT, msg.as_string())
             server.close()
-            self.log=add_logger()
             self.log.log(f'Sucessfully send the mail to {str(RECIPIENT)} by simple smtp protocol','emails.log',1)
         except Exception as e:
             self.log.log(f'Could not send the mail to {str(RECIPIENT)} by simple smtp protocol now trying with AWS SES services  error, {str(e)}','emails.log',3)
