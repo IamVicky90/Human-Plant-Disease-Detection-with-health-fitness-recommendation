@@ -51,7 +51,7 @@ def home():
             return redirect('/failed_login')
         except Exception as e:
             log.log(f'Some Unknown Error Occured in home funtion, error {str(e)}','app.log',3)
-            return 'Sorry due to some reason we are unable to show you the results. Please Consult with the Developer Team'
+            return '<center><h1>Sorry due to some reason we are unable to show you the results. Please Consult with the Developer Team</h1></center>'
     elif home_login_flag[0]:
         return render_template('home.html')
     else:
@@ -77,7 +77,7 @@ def send_code():
             return "<h1>Your Email is not registered with us please Sign-Up with Us! Refresh this page</h1>"
         except Exception as e:
             log.log(f'Some Unknown Error Occured in send_code funtion, error {str(e)}','app.log',3)
-            return 'Sorry due to some reason we are unable to show you the results. Please Consult with the Developer Team'
+            return '<center><h1>Sorry due to some reason we are unable to show you the results. Please Consult with the Developer Team</h1></center>'
     return redirect('/forget_password')
 @app.route('/validate_code',methods=['GET','POST'])
 def validate_code():
@@ -90,7 +90,7 @@ def validate_code():
             return "<h1>Code is not correct Please try again! Please refresh the page</h1>"
         except Exception as e:
             log.log(f'Some Unknown Error Occured in validate_code funtion, error {str(e)}','app.log',3)
-            return 'Sorry due to some reason we are unable to show you the results. Please Consult with the Developer Team'
+            return '<center><h1>Sorry due to some reason we are unable to show you the results. Please Consult with the Developer Team</h1></center>'
     return redirect('/forget_password')
 @app.route('/generate_new_password',methods=['GET','POST'])
 def generate_new_password():
@@ -103,7 +103,7 @@ def generate_new_password():
             return "<h1>Password Generated Sucessfully now you can log-in. Please refresh the page</h1>"
         except Exception as e:
             log.log(f'Some Unknown Error Occured in generate_new_password funtion, error {str(e)}','app.log',3)
-            return 'Sorry due to some reason we are unable to show you the results. Please Consult with the Developer Team'
+            return '<center><h1>Sorry due to some reason we are unable to show you the results. Please Consult with the Developer Team</h1></center>'
     return redirect('/forget_password')
 @app.route('/signup',methods=['GET','POST'])
 def signup():
@@ -130,7 +130,7 @@ def submit_sign_up_form():
                 return render_template('Sign_up_sucessfull.html')
         except Exception as e:
             log.log(f'Some Unknown Error Occured in submit_sign_up_form funtion, error {str(e)}','app.log',3)
-            return 'Sorry due to some reason we are unable to show you the results. Please Consult with the Developer Team'
+            return '<center><h1>Sorry due to some reason we are unable to show you the results. Please Consult with the Developer Team</h1></center>'
         return dump_data
 @app.route('/sign_up_sucessfull',methods=['GET','POST'])
 def sign_up_sucessfull():
@@ -155,7 +155,7 @@ def predict():
             return render_template(output_page, pred_output = pred, user_image = 'user_upload/'+filename)
         except Exception as e:
             log.log(f'Some Unknown Error Occured in predict funtion, error {str(e)}','app.log',3)
-            return 'Sorry due to some reason we are unable to show you the results. Please Consult with the Developer Team'
+            return '<center><h1>Sorry due to some reason we are unable to show you the results. Please Consult with the Developer Team</h1></center>'
     return redirect('/') 
 # ............................Plant APP Ended........................................................
 
@@ -217,7 +217,7 @@ def heart_predict():
                 return render_template('heart.html')
         except Exception as e:
             log.log(f'Some Unknown Error Occured in heart_predict funtion, error {str(e)}','app.log',3)
-            return 'Sorry due to some reason we are unable to show you the results. Please Consult with the Developer Team'
+            return '<center><h1>Sorry due to some reason we are unable to show you the results. Please Consult with the Developer Team</h1></center>'
     return redirect('/')
 
 @app.route("/breast", methods=['GET', 'POST'])
@@ -254,7 +254,7 @@ def breast_predict():
                     
         except Exception as e:
             log.log(f'Some Unknown Error Occured in breast_predict funtion, error {str(e)}','app.log',3)
-            return 'Sorry due to some reason we are unable to show you the results. Please Consult with the Developer Team'
+            return '<center><h1>Sorry due to some reason we are unable to show you the results. Please Consult with the Developer Team</h1></center>'
 
         return render_template('breast.html')
     return redirect('/')
@@ -282,7 +282,7 @@ def predict_pnemonia():
                 return result
             except Exception as e:
                 log.log(f'Some Unknown Error Occured in predict_pnemonia funtion, error {str(e)}','app.log',3)
-                return 'Sorry due to some reason we are unable to show you the results. Please Consult with the Developer Team'
+                return '<center><h1>Sorry due to some reason we are unable to show you the results. Please Consult with the Developer Team</h1></center>'
         return redirect('/')
     return redirect('/')
     
@@ -323,7 +323,7 @@ def diabtes_predict():
                     return render_template('diabtes.html',prediction_text=prediction_text,link="https://my-medical-report-docfile.s3.us-east-2.amazonaws.com/file.docx",text="Click Here to generate report")
             except Exception as e:
                 log.log(f'Some Unknown Error Occured in diabtes_predict funtion, error {str(e)}','app.log',3)
-                return 'Sorry due to some reason we are unable to show you the results. Please Consult with the Developer Team'
+                return '<center><h1>Sorry due to some reason we are unable to show you the results. Please Consult with the Developer Team</h1></center>'
         return render_template('diabtes.html')
     return redirect('/')
 @app.route("/skin", methods=['GET', 'POST'])
@@ -349,7 +349,7 @@ def predict_skin():
                 result=preds
             except Exception as e:
                 log.log(f'Some Unknown Error Occured in predict_skin funtion, error {str(e)}','app.log',3)
-                return 'Sorry due to some reason we are unable to show you the results. Please Consult with the Developer Team'
+                return '<center><h1>Sorry due to some reason we are unable to show you the results. Please Consult with the Developer Team</h1></center>'
             return result
     return redirect('/')
 @app.route("/kidney", methods=['GET', 'POST'])

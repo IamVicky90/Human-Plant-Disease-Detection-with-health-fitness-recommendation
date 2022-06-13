@@ -80,8 +80,8 @@ class medical_report_management:
         '''
         logger=add_logger()
         try:
-            AWS_ACCESS_KEY_ID=os.environ.get('AWS_ACCESS_KEY_ID')
-            AWS_SECRET_ACCESS_KEY=os.environ.get('AWS_SECRET_ACCESS_KEY')
+            AWS_ACCESS_KEY_ID=os.environ.get('_AWS_ACCESS_KEY_ID')
+            AWS_SECRET_ACCESS_KEY=os.environ.get('_AWS_SECRET_ACCESS_KEY')
             s3_client = boto3.client('s3',aws_access_key_id=AWS_ACCESS_KEY_ID,aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
             s3_client.upload_file('src/medical_report_file/report.docx', 'my-medical-report-docfile', 'file.docx', ExtraArgs={'ACL':'public-read'})
             logger.log(f'Sucessfully uploaded the doc file to s3 bucket','create_medical_report.log',level_number=1)
