@@ -139,7 +139,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-ipynb files
-csv_data
-skin cancer dl
-Various Plant Disesse Detection Prediction DataSet
+ipynb_files/
+csv_data/
+skin_cancer_dl/
+Various_Plant_Disesse_Detection_Prediction_DataSet/
