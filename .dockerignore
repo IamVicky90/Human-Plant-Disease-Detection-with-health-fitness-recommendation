@@ -143,3 +143,6 @@ ipynb_files/
 csv_data/
 skin_cancer_dl/
 Various_Plant_Disesse_Detection_Prediction_DataSet/
+.git/
+chest_xray/
+.gitignore
