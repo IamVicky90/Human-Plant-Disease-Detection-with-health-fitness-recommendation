@@ -207,12 +207,12 @@ def heart_predict():
                     prediction_text="Prediction Result: Don't worry You don't have any disease! "
                     email=email_from_home[-1]
                     medical_rep_obj.generate_the_report(email,prediction_text)
-                    return render_template('heart.html',prediction_text=prediction_text,link="https://my-medical-report-docfile.s3.us-east-2.amazonaws.com/file.docx",text="Click Here to generate report")
+                    return render_template('heart.html',prediction_text=prediction_text,link="https://my-medical-report.s3.us-east-1.amazonaws.com/file.docx",text="Click Here to generate report")
                 elif output==1:
                     prediction_text="We found something wrong with you please consult with the doctor! "
                     email=email_from_home[-1]
                     medical_rep_obj.generate_the_report(email,prediction_text)
-                    return render_template('heart.html',prediction_text=prediction_text,link="https://my-medical-report-docfile.s3.us-east-2.amazonaws.com/file.docx",text="Click Here to generate report")
+                    return render_template('heart.html',prediction_text=prediction_text,link="https://my-medical-report.s3.us-east-1.amazonaws.com/file.docx",text="Click Here to generate report")
             else:
                 return render_template('heart.html')
         except Exception as e:
@@ -245,12 +245,12 @@ def breast_predict():
                     prediction_text="Prediction Result: Don't worry You don't have any disease! "
                     email=email_from_home[-1]
                     medical_rep_obj.generate_the_report(email,prediction_text)
-                    return render_template('breast.html',prediction_text=prediction_text,link="https://my-medical-report-docfile.s3.us-east-2.amazonaws.com/file.docx",text="Click Here to generate report")
+                    return render_template('breast.html',prediction_text=prediction_text,link="https://my-medical-report.s3.us-east-1.amazonaws.com/file.docx",text="Click Here to generate report")
                 elif output==1:
                     prediction_text="We found something wrong with you please consult with the doctor! "
                     email=email_from_home[-1]
                     medical_rep_obj.generate_the_report(email,prediction_text)
-                    return render_template('breast.html',prediction_text=prediction_text,link="https://my-medical-report-docfile.s3.us-east-2.amazonaws.com/file.docx",text="Click Here to generate report")
+                    return render_template('breast.html',prediction_text=prediction_text,link="https://my-medical-report.s3.us-east-1.amazonaws.com/file.docx",text="Click Here to generate report")
                     
         except Exception as e:
             log.log(f'Some Unknown Error Occured in breast_predict funtion, error {str(e)}','app.log',3)
@@ -314,13 +314,13 @@ def diabtes_predict():
                     prediction_text="Prediction Result: Don't worry You don't have diabtes! "
                     email=email_from_home[-1]
                     medical_rep_obj.generate_the_report(email,prediction_text)
-                    return render_template('diabtes.html',prediction_text=prediction_text,link="https://my-medical-report-docfile.s3.us-east-2.amazonaws.com/file.docx",text="Click Here to generate report")
+                    return render_template('diabtes.html',prediction_text=prediction_text,link="https://my-medical-report.s3.us-east-1.amazonaws.com/file.docx",text="Click Here to generate report")
                     
                 elif output==1:
                     prediction_text="We found that you have diabtes, please consult with the doctor!"
                     email=email_from_home[-1]
                     medical_rep_obj.generate_the_report(email,prediction_text)
-                    return render_template('diabtes.html',prediction_text=prediction_text,link="https://my-medical-report-docfile.s3.us-east-2.amazonaws.com/file.docx",text="Click Here to generate report")
+                    return render_template('diabtes.html',prediction_text=prediction_text,link="https://my-medical-report.s3.us-east-1.amazonaws.com/file.docx",text="Click Here to generate report")
             except Exception as e:
                 log.log(f'Some Unknown Error Occured in diabtes_predict funtion, error {str(e)}','app.log',3)
                 return '<center><h1>Sorry due to some reason we are unable to show you the results. Please Consult with the Developer Team</h1></center>'
@@ -384,12 +384,12 @@ def kidney_predict():
                 prediction_text="Result: Prediction Result: Don't worry You don't have any Kidney disease!"
                 email=email_from_home[-1]
                 medical_rep_obj.generate_the_report(email,prediction_text)
-                return render_template('kidney.html',prediction_text=prediction_text,link="https://my-medical-report-docfile.s3.us-east-2.amazonaws.com/file.docx",text="Click Here to generate report")
+                return render_template('kidney.html',prediction_text=prediction_text,link="https://my-medical-report.s3.us-east-1.amazonaws.com/file.docx",text="Click Here to generate report")
             elif output==1:
                 prediction_text="Result: We found something wrong with your kidney, please consult with the doctor"
                 email=email_from_home[-1]
                 medical_rep_obj.generate_the_report(email,prediction_text)
-                return render_template('kidney.html',prediction_text=prediction_text,link="https://my-medical-report-docfile.s3.us-east-2.amazonaws.com/file.docx",text="Click Here to generate report")
+                return render_template('kidney.html',prediction_text=prediction_text,link="https://my-medical-report.s3.us-east-1.amazonaws.com/file.docx",text="Click Here to generate report")
         return render_template('diabtes.html')
     return redirect('/')
 
